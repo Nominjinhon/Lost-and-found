@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ollo - Алдагдсан эд зүйл</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      background-color: #fff;
+      color: #222;
+    }
+
+    /* Header */
+    .header {
+      background-color: #d9f3e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 40px;
+    }
+
+    .logo {
+      margin: 0;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #188e5b;
+    }
+
+    .header-buttons button {
+      margin-left: 10px;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 2px solid #188e5b;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #188e5b;
+    }
+
+    .btn-filled {
+      background: #188e5b;
+      color: #fff;
+      border: none;
+    }
+
+    /* Content */
+    .content {
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .item-card {
+      display: flex;
+      gap: 40px;
+      background: #fff;
+      max-width: 1000px;
+      align-items: flex-start;
+    }
+
+    .item-image {
+      width: 400px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .item-info {
+      max-width: 500px;
+    }
+
+    .item-info h2 {
+      margin-top: 0;
+      font-size: 1.8em;
+    }
+
+    .item-details {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 20px 0;
+      line-height: 1.8;
+    }
+
+    .item-desc {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 10px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .btn-report {
+      background: #188e5b;
+      color: #fff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #d9f3e0;
+      padding: 30px 50px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-logo {
+      color: #188e5b;
+      font-size: 1.4em;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .footer-copy {
+      font-size: 0.9em;
+      color: #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .item-card {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .item-image {
+        width: 90%;
+      }
+
+      .item-info {
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">Ollo</div>
+    <div class="header-buttons">
+      <button class="btn-outline">Миний зар</button>
+      <button class="btn-filled">Зар нэмэх</button>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="content">
+    <div class="item-card">
+      <img src="bike.jpg" alt="Наро унадаг дугуй" class="item-image">
+
+      <div class="item-info">
+        <h2>Наро унадаг дугуй</h2>
+        <ul class="item-details">
+          <li>📍 2-р сургуулийн урд тал</li>
+          <li>📅 2025.09.22</li>
+          <li>👤 А.Болд</li>
+          <li>💰 500,000</li>
+        </ul>
+        <p class="item-desc">
+          Сургуулийн урд талд тавьсан дугуйгаа алдсан. Харсан хүн байвал холбоо барина уу.
+        </p>
+        <button class="btn-report">Мэдэгдэх</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="#">Бидний тухай</a>
+      <a href="#">Холбогдох</a>
+      <a href="#">Тусламж</a>
+    </div>
+    <div class="footer-logo">Ollo</div>
+    <p class="footer-copy">TeamName © 2025. Бүх эрх хуулиар хамгаалагдав.</p>
+  </footer>
+</body>
+</html>
