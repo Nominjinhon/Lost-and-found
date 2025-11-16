@@ -1,0 +1,290 @@
+/* Basic reset */
+* { box-sizing: border-box; }
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #111827;
+    background: #ffffff;
+}
+
+/* Layout */
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 36px;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    height: 72px;
+}
+
+.site-header {
+    background: #e9f7ef;
+    border-bottom: 1px solid rgba(0,0,0,0.02);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #14a463;
+    font-weight: 700;
+}
+
+.logo-icon { font-size: 22px; }
+.logo-text { font-size: 18px; }
+
+/* Page title */
+.page-title {
+    font-size: 30px;
+    margin: 32px 0 10px;
+    color: #111827;
+}
+
+.lead {
+    margin: 0 0 20px;
+    color: #6b7280;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.tab {
+    flex: 1;
+    padding: 14px 26px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background: #f3f4f6;
+    color: #374151;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tab--active {
+    background: #22a65b;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(2,6,23,0.06);
+}
+
+/* Card / fieldset */
+.card {
+    border: 1px solid rgba(0,0,0,0.06);
+    background: #fff;
+    padding: 26px;
+    border-radius: 10px;
+    box-shadow: 0 10px 26px rgba(2,6,23,0.03);
+}
+
+/* Form rows */
+.form-row {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row label {
+    font-size: 15px;
+    color: #374151;
+    font-weight: 600;
+}
+
+.form-row input[type="text"],
+.form-row input[type="date"],
+.form-row select,
+.form-row textarea {
+    border: 1px solid #e6e8eb;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    background: #fff;
+    outline: none;
+}
+
+.form-row input::placeholder,
+.form-row textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* 2-column grid */
+.form-grid {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.form-grid .form-row {
+    flex: 1;
+}
+
+/* Checkboxes / radios */
+.checkboxes {
+    border: 0;
+    padding: 0;
+    margin: 16px 0;
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.checkboxes label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+}
+
+.checkboxes input[type="checkbox"],
+.checkboxes input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #22a65b;
+}
+
+/* RANGE — dual handle in one line */
+.range-wrap {
+    position: relative;
+    height: 72px;
+    margin-top: 16px;
+    padding-top: 6px;
+}
+
+/* Two ranges overlap */
+.range-wrap input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Track (transparent, we draw custom track below) */
+.range-wrap input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: transparent;
+    border-radius: 6px;
+}
+
+/* Thumb */
+.range-wrap input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    background: #374151;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+/* Background track */
+.range-wrap::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 36px;
+    height: 6px;
+    background: #e6e8eb;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+/* Active selected range (JS updates left/width) */
+.range-wrap .active-track {
+    position: absolute;
+    top: 36px;
+    height: 6px;
+    background: #22a65b;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+/* Range value labels */
+.range-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+
+.range-values span {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #374151;
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn--ghost {
+    background: #fff;
+    border: 1px solid #e6e8eb;
+    color: #374151;
+}
+
+.btn--primary {
+    background: #22a65b;
+    color: #fff;
+    box-shadow: 0 6px 14px rgba(34,166,91,0.16);
+}
+
+/* Footer */
+.site-footer {
+    padding: 18px 0;
+    color: #6b7280;
+    font-size: 13px;
+    border-top: 1px solid rgba(0,0,0,0.02);
+    margin-top: 28px;
+}
+
+/* Utility */
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px,1px,1px,1px);
+    white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+    .container { padding: 20px; }
+    .form-grid { flex-direction: column; gap: 14px; }
+    .tabs { gap: 10px; }
+    .tab { padding: 12px 16px; font-size: 15px; }
+    .range-wrap { height: 84px; }
+    .range-values { margin-top: 18px; }
+}

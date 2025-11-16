@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Зар оруулах — Ollo</title>
+  <link rel="stylesheet" href="styles/Add.css" />
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="logo" aria-hidden="true">
+        <!-- Жишээ лого -->
+        <span class="logo-icon">🔍</span>
+        <span class="logo-text">Ollo</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="main" role="main">
+    <h1 class="page-title">Зар оруулах</h1>
+    <p class="lead">Эд зүйлийн талаарх нарийн мэдээлэл оруулна уу!</p>
+
+    <form class="ad-form" id="adForm" action="#" method="post" novalidate>
+      <!-- Tabs (semantic: role="tablist") -->
+      <div class="tabs" role="tablist" aria-label="Зарын төрөл">
+        <button type="button"
+                role="tab"
+                aria-selected="true"
+                id="tab-lost"
+                class="tab tab--active">Хаясан</button>
+
+        <button type="button"
+                role="tab"
+                aria-selected="false"
+                id="tab-found"
+                class="tab">Олсон</button>
+      </div>
+
+      <fieldset class="card">
+        <legend class="visually-hidden">Зарны дэлгэрэнгүй</legend>
+
+        <div class="form-row">
+          <label for="itemName">Эд зүйлын нэр</label>
+          <input id="itemName" name="itemName" type="text" placeholder="Жишээ: Утас, түлхүүр..." />
+        </div>
+
+        <div class="form-row">
+          <label for="typeSelect">Төрөл</label>
+          <select id="typeSelect" name="type">
+            <option value="">Төрөл сонгох</option>
+            <option value="phone">Утас</option>
+            <option value="keys">Түлхүүр</option>
+            <option value="wallet">Төсөв/Цүнх</option>
+            <option value="other">Бусад</option>
+          </select>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="location">Байршил</label>
+            <input id="location" name="location" type="text" placeholder="Улаанбаатар, СХД..." />
+          </div>
+
+          <div class="form-row">
+            <label for="date">Хугацаа</label>
+            <input id="date" name="date" type="date" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="description">Тайлбар</label>
+          <textarea id="description" name="description" rows="3" placeholder="Нэмэлт мэдээлэл..."></textarea>
+        </div>
+
+        <fieldset class="checkboxes" aria-label="Онцгой шинж тэмдэг">
+          <legend class="legend">Онцгой шинж тэмдэг</legend>
+          <label><input type="checkbox" name="feat" value="1" /> Сонголт 1</label>
+          <label><input type="checkbox" name="feat" value="2" /> Сонголт 2</label>
+          <label><input type="checkbox" name="feat" value="3" /> Сонголт 3</label>
+        </fieldset>
+
+        <!-- Шагнал (dual-range simulation using two ranges + JS) -->
+        <div class="form-row">
+          <label class="legend">Шагнал</label>
+          <div class="range-wrap">
+            <input type="range" id="rangeMin" name="reward_min" min="0" max="200000" step="1000" value="50000" />
+            <input type="range" id="rangeMax" name="reward_max" min="0" max="200000" step="1000" value="100000" />
+            <div class="range-values">
+              <span id="rangeMinVal">50,000</span>
+              <span id="rangeMaxVal">100,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="contact">Холбоо барих мэдээлэл</label>
+            <input id="contact" name="contact" type="text" placeholder="Утас / имэйл..." />
+          </div>
+
+          <div class="form-row align-center">
+            <label class="inline"><input type="checkbox" name="hideContact" /> Нуух</label>
+          </div>
+        </div>
+
+        <fieldset class="checkboxes" aria-label="Зарын төрөл">
+          <legend class="legend">Зарын төрөл</legend>
+          <label><input type="radio" name="ad_type" value="urgent" /> Яаралтай (10,000)</label>
+          <label><input type="radio" name="ad_type" value="special" /> Тусгай (5,000)</label>
+          <label><input type="radio" name="ad_type" value="normal" checked /> Энгийн (0)</label>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="reset" class="btn btn--ghost">Цуцлах</button>
+          <button type="submit" class="btn btn--primary">Оруулах</button>
+        </div>
+      </fieldset>
+    </form>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">© Ollo</div>
+  </footer>
+
+  <!-- Minimal JS: таб солих болон хоёр range-г уялдуулах -->
+  <script>
+    (function () {
+      // Tabs
+      const tabLost = document.getElementById('tab-lost');
+      const tabFound = document.getElementById('tab-found');
+      const form = document.getElementById('adForm');
+
+      function setActiveTab(active) {
+        if (active === 'lost') {
+          tabLost.classList.add('tab--active');
+          tabFound.classList.remove('tab--active');
+          tabLost.setAttribute('aria-selected', 'true');
+          tabFound.setAttribute('aria-selected', 'false');
+          form.dataset.type = 'lost';
+        } else {
+          tabFound.classList.add('tab--active');
+          tabLost.classList.remove('tab--active');
+          tabFound.setAttribute('aria-selected', 'true');
+          tabLost.setAttribute('aria-selected', 'false');
+          form.dataset.type = 'found';
+        }
+      }
+
+      tabLost.addEventListener('click', () => setActiveTab('lost'));
+      tabFound.addEventListener('click', () => setActiveTab('found'));
+
+      // Dual range sync (min should not exceed max)
+      const rangeMin = document.getElementById('rangeMin');
+      const rangeMax = document.getElementById('rangeMax');
+      const rangeMinVal = document.getElementById('rangeMinVal');
+      const rangeMaxVal = document.getElementById('rangeMaxVal');
+
+      function formatNumber(n){
+        return Number(n).toLocaleString('en-US');
+      }
+
+      function syncRanges() {
+        let min = parseInt(rangeMin.value, 10);
+        let max = parseInt(rangeMax.value, 10);
+
+        if (min > max) {
+          // swap so the two handles don't cross
+          const tmp = min;
+          min = max;
+          max = tmp;
+        }
+
+        rangeMinVal.textContent = formatNumber(min);
+        rangeMaxVal.textContent = formatNumber(max);
+
+        // Visually update z-index to show handles correctly (pure CSS might be better)
+        if (parseInt(rangeMin.value, 10) > parseInt(rangeMax.value, 10)) {
+          rangeMin.style.zIndex = 2;
+          rangeMax.style.zIndex = 1;
+        } else {
+          rangeMin.style.zIndex = 1;
+          rangeMax.style.zIndex = 2;
+        }
+      }
+
+      rangeMin.addEventListener('input', syncRanges);
+      rangeMax.addEventListener('input', syncRanges);
+
+      // initial
+      syncRanges();
+      setActiveTab('lost');
+    })();
+  </script>
+</body>
+</html>

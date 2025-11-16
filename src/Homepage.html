@@ -1,173 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="mn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/Homepage.css">
-    <title>Home Page</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ollo — Бүх зар</title>
+  <link rel="stylesheet" href="styles/Homepage.css" />
 </head>
-<div>
 <body>
-    <header>
-        <nav>
-            <a href="#" class="brand">
-                <span>Losty</span>
-            </a>
-        </nav>
-        <menu>
-            <button class="outline">Миний Зар</button>
-            <button class="filled">Зар нэмэх</button>
-        </menu>
-    </header>
-    
-    
+  <header class="site" role="banner" aria-label="Эхлэл">
+    <div class="top-row">
+      <a class="brand" href="#" aria-label="Ollo">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="10" fill="#e6fbef"></circle>
+          <path d="M7 12h10M12 7v10" stroke="#18a861" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span class="brand-name">Ollo</span>
+      </a>
 
-    <main>
-        <section class="search-section">
-            <button >Бүх зар</button>
-            <div>
-            <input type="search" placeholder="Хайлт хийх">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                </button>
-            </div>
-        </section>
-        <section class="feed-section-urgent">
-            <h2>Яаралтай</h2>
-            <article >
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-        </section>
+      <form class="search" role="search" aria-label="Хайлт">
+        <input id="search-input" type="search" placeholder="Хайлт хийх" />
+        <button type="submit" aria-label="Хайх">🔍</button>
+      </form>
 
-        <section class="feed-section expiring">
-            <h2>Сүүлд нэмэгдсэн</h2>
-            <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-        </section>
-        <section class="feed-section recent">
-            <h2>Сүүлд нэмэгдсэн</h2>
-            <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-             <article>
-                <figure>
-                    <img src="images/test.webp" alt="test image">
-                    <frigcaption>
-                        <h3>post 1</h3>
-                        <time datetime="2025-10-04">2025-10-04</time>
-                        <p>МУИС 6-р байр — Дотор 2 том ноотбок</p>
-                    </frigcaption>
-                </figure>
-            </article>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Losty. All rights reserved.</p>
-    </footer>
+      <nav class="actions" aria-label="Үйлдлүүд">
+        <a class="outline-btn" href="#my-ads">Миний зар</a>
+        <a class="btn" href="#add-ad">Зар нэмэх</a>
+      </nav>
+    </div>
+  </header>
+
+  <main role="main" class="container">
+    <section class="hero-row" aria-labelledby="all-ads">
+      <h1 id="all-ads" class="page-title">Бүх зар</h1>
+      <div class="status-inline" aria-hidden="false">
+        <span class="status"><span class="dot red"></span> Хайж байна</span>
+        <span class="status"><span class="dot green"></span> Олсон</span>
+      </div>
+    </section>
+
+    <section class="group" aria-labelledby="urgent-title">
+      <h2 id="urgent-title" class="group-title">Яаралтай</h2>
+      <section class="cards" aria-label="Яаралтай зарууд">
+       
+        <article class="card" aria-labelledby="ad-1">
+          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
+          <figure class="thumb" role="img" aria-label="Зураг">
+          </figure>
+          <h3 id="ad-1" class="card-title"><span class="status-dot red" aria-hidden="true">●</span> Dell цүнх</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <article class="card" aria-labelledby="ad-2">
+          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
+          <figure class="thumb"></figure>
+          <h3 id="ad-2" class="card-title"><span class="status-dot red">●</span> Dell цүнх</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <article class="card" aria-labelledby="ad-3">
+          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
+          <figure class="thumb"></figure>
+          <h3 id="ad-3" class="card-title"><span class="status-dot red">●</span> Dell цүнх</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <!-- Ижил маягаар бүх картуудыг нэмнэ -->
+      </section>
+    </section>
+
+    <section class="group" aria-labelledby="recent-title">
+      <h2 id="recent-title" class="group-title">Сүүлд нэмэгдсэн</h2>
+      <section class="cards" aria-label="Сүүлд нэмэгдсэн зар">
+        <article class="card" aria-labelledby="ad-11">
+          <figure class="thumb"></figure>
+          <h3 id="ad-11" class="card-title"><span class="status-dot red">●</span> муурын эр зулзага</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <article class="card" aria-labelledby="ad-12">
+          <figure class="thumb"></figure>
+          <h3 id="ad-12" class="card-title"><span class="status-dot red">●</span> Usa чихэвч</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <!-- ... -->
+      </section>
+    </section>
+
+    <!-- Нэмэлт бүлгүүд (Удаж буй, Бичиг баримт, Гар утас) -->
+    <section class="group" aria-labelledby="phones-title">
+      <h2 id="phones-title" class="group-title">Гар утас</h2>
+      <section class="cards" aria-label="Гар утас зар">
+        <article class="card" aria-labelledby="ad-41">
+          <figure class="thumb"></figure>
+          <h3 id="ad-41" class="card-title"><span class="status-dot red">●</span> Iphone 6</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <article class="card" aria-labelledby="ad-42">
+          <figure class="thumb"></figure>
+          <h3 id="ad-42" class="card-title"><span class="status-dot red">●</span> Iphone 13 Pro</h3>
+          <p class="meta">10 сарын 4, 2025</p>
+          <time datetime="2025-10-04">МУИС 8-р байр</time>
+        </article>
+
+        <!-- ... -->
+      </section>
+    </section>
+  </main>
+
+  <footer class="site" role="contentinfo">
+    <nav aria-label="Footer links">
+      <a href="#">Бидний тухай</a>
+      <a href="#">Холбогдох</a>
+      <a href="#">Тусламж</a>
+    </nav>
+    <address class="brand-addr" aria-label="Холбоо">
+      <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#e6fbef"></circle><path d="M7 12h10M12 7v10" stroke="#18a861" stroke-width="1.4" stroke-linecap="round"></path></svg>
+      <span>Ollo</span>
+    </address>
+    <small class="copyright">TeamName © 2025. Бүх эрх хуулиар хамгаалагдсан.</small>
+  </footer>
 </body>
-</div>
 </html>
