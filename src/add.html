@@ -5,17 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Зар оруулах — Ollo</title>
   <link rel="stylesheet" href="styles/Add.css" />
+  <link rel=stylesheet href="styles/Homepage.css" />
+  <script type="module" src="./comp/main-header.js" ></script>
 </head>
 <body>
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <div class="logo" aria-hidden="true">
-        <!-- Жишээ лого -->
-        <span class="logo-icon">🔍</span>
-        <span class="logo-text">Ollo</span>
-      </div>
-    </div>
-  </header>
+  
 
   <main class="container" id="main" role="main">
     <h1 class="page-title">Зар оруулах</h1>
@@ -84,6 +78,7 @@
         <div class="form-row">
           <label class="legend">Шагнал</label>
           <div class="range-wrap">
+            <div class="active-track"></div>
             <input type="range" id="rangeMin" name="reward_min" min="0" max="200000" step="1000" value="50000" />
             <input type="range" id="rangeMax" name="reward_max" min="0" max="200000" step="1000" value="100000" />
             <div class="range-values">
@@ -155,6 +150,8 @@
       const rangeMax = document.getElementById('rangeMax');
       const rangeMinVal = document.getElementById('rangeMinVal');
       const rangeMaxVal = document.getElementById('rangeMaxVal');
+      const activeTrack = document.querySelector('.active-track');
+      const rangeWrap = document.querySelector('.range-wrap');
 
       function formatNumber(n){
         return Number(n).toLocaleString('en-US');
@@ -169,18 +166,26 @@
           const tmp = min;
           min = max;
           max = tmp;
+          rangeMin.value = min;
+          rangeMax.value = max;
         }
 
         rangeMinVal.textContent = formatNumber(min);
         rangeMaxVal.textContent = formatNumber(max);
 
-        // Visually update z-index to show handles correctly (pure CSS might be better)
+        // Update active track position and width
+        const minPercent = (min / 200000) * 100;
+        const maxPercent = (max / 200000) * 100;
+        activeTrack.style.left = minPercent + '%';
+        activeTrack.style.width = (maxPercent - minPercent) + '%';
+
+        // Visually update z-index to show handles correctly
         if (parseInt(rangeMin.value, 10) > parseInt(rangeMax.value, 10)) {
-          rangeMin.style.zIndex = 2;
-          rangeMax.style.zIndex = 1;
+          rangeMin.style.zIndex = 5;
+          rangeMax.style.zIndex = 4;
         } else {
-          rangeMin.style.zIndex = 1;
-          rangeMax.style.zIndex = 2;
+          rangeMin.style.zIndex = 4;
+          rangeMax.style.zIndex = 5;
         }
       }
 

@@ -5,29 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ollo — Бүх зар</title>
   <link rel="stylesheet" href="styles/Homepage.css" />
+  <script type="module" src="./comp/main-header.js"></script>
 </head>
 <body>
-  <header class="site" role="banner" aria-label="Эхлэл">
-    <div class="top-row">
-      <a class="brand" href="#" aria-label="Ollo">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="10" fill="#e6fbef"></circle>
-          <path d="M7 12h10M12 7v10" stroke="#18a861" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-        <span class="brand-name">Ollo</span>
-      </a>
-
-      <form class="search" role="search" aria-label="Хайлт">
-        <input id="search-input" type="search" placeholder="Хайлт хийх" />
-        <button type="submit" aria-label="Хайх">🔍</button>
-      </form>
-
-      <nav class="actions" aria-label="Үйлдлүүд">
-        <a class="outline-btn" href="#my-ads">Миний зар</a>
-        <a class="btn" href="#add-ad">Зар нэмэх</a>
-      </nav>
-    </div>
-  </header>
+  <main-header></main-header>
+ 
 
   <main role="main" class="container">
     <section class="hero-row" aria-labelledby="all-ads">
@@ -37,58 +19,22 @@
         <span class="status"><span class="dot green"></span> Олсон</span>
       </div>
     </section>
+    <script type="module" src="./comp/ad-card.js"></script>
 
     <section class="group" aria-labelledby="urgent-title">
       <h2 id="urgent-title" class="group-title">Яаралтай</h2>
       <section class="cards" aria-label="Яаралтай зарууд">
-       
-        <article class="card" aria-labelledby="ad-1">
-          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
-          <figure class="thumb" role="img" aria-label="Зураг">
-          </figure>
-          <h3 id="ad-1" class="card-title"><span class="status-dot red" aria-hidden="true">●</span> Dell цүнх</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <article class="card" aria-labelledby="ad-2">
-          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
-          <figure class="thumb"></figure>
-          <h3 id="ad-2" class="card-title"><span class="status-dot red">●</span> Dell цүнх</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <article class="card" aria-labelledby="ad-3">
-          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
-          <figure class="thumb"></figure>
-          <h3 id="ad-3" class="card-title"><span class="status-dot red">●</span> Dell цүнх</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <!-- Ижил маягаар бүх картуудыг нэмнэ -->
+        <ad-card id="ad-1" title="Dell цүнх" image="../images/backpack.png" alt="Dell цүнх" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
+        <ad-card id="ad-2" title="Dell цүнх" image="../images/backpack.png" alt="Dell цүнх" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
+        <ad-card id="ad-3" title="Dell цүнх" image="../images/backpack.png" alt="Dell цүнх" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
       </section>
     </section>
 
     <section class="group" aria-labelledby="recent-title">
       <h2 id="recent-title" class="group-title">Сүүлд нэмэгдсэн</h2>
       <section class="cards" aria-label="Сүүлд нэмэгдсэн зар">
-        <article class="card" aria-labelledby="ad-11">
-          <figure class="thumb"></figure>
-          <h3 id="ad-11" class="card-title"><span class="status-dot red">●</span> муурын эр зулзага</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <article class="card" aria-labelledby="ad-12">
-          <figure class="thumb"></figure>
-          <h3 id="ad-12" class="card-title"><span class="status-dot red">●</span> Usa чихэвч</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <!-- ... -->
+        <ad-card id="ad-11" title="муурын эр зулзага" image="../images/backpack.png" alt="муурын эр зулзага" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
+        <ad-card id="ad-12" title="Usa чихэвч" image="../images/backpack.png" alt="Usa чихэвч" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
       </section>
     </section>
 
@@ -96,21 +42,8 @@
     <section class="group" aria-labelledby="phones-title">
       <h2 id="phones-title" class="group-title">Гар утас</h2>
       <section class="cards" aria-label="Гар утас зар">
-        <article class="card" aria-labelledby="ad-41">
-          <figure class="thumb"></figure>
-          <h3 id="ad-41" class="card-title"><span class="status-dot red">●</span> Iphone 6</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <article class="card" aria-labelledby="ad-42">
-          <figure class="thumb"></figure>
-          <h3 id="ad-42" class="card-title"><span class="status-dot red">●</span> Iphone 13 Pro</h3>
-          <p class="meta">10 сарын 4, 2025</p>
-          <time datetime="2025-10-04">МУИС 8-р байр</time>
-        </article>
-
-        <!-- ... -->
+        <ad-card id="ad-41" title="Iphone 6" image="../images/backpack.png" alt="Iphone 6" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
+        <ad-card id="ad-42" title="Iphone 13 Pro" image="../images/backpack.png" alt="Iphone 13 Pro" date="10 сарын 4, 2025" location="МУИС 8-р байр" status="lost"></ad-card>
       </section>
     </section>
   </main>
