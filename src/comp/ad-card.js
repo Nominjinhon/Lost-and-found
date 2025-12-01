@@ -3,21 +3,33 @@ class AdCard extends HTMLElement {
         super();
     }
 
+    static get observedAttributes() {
+        return ['title', 'image', 'alt', 'date', 'location', 'status', 'id'];
+    }
+
     connectedCallback() {
+        this.render();
+    }
+
+    attributeChangedCallback() {
+        this.render();
+    }
+
+    render() {
+        const id = this.getAttribute('id') || 'ad-default';
         const title = this.getAttribute('title') || '';
         const image = this.getAttribute('image') || '../images/backpack.png';
         const alt = this.getAttribute('alt') || 'Зураг';
         const date = this.getAttribute('date') || '';
         const location = this.getAttribute('location') || '';
-        const status = this.getAttribute('status') || 'lost'; // 'lost' or 'found'
-        const id = this.getAttribute('id') || 'ad-default';
+        const status = this.getAttribute('status') || 'lost';
 
         const statusClass = status === 'found' ? 'green' : 'red';
-        const statusText = status === 'found' ? 'Олсон' : 'Хайж байна';
 
         this.innerHTML = `
         <article class="card" aria-labelledby="${id}">
-          <button class="bookmark" aria-label="Нэмэх дуртай">☆</button>
+          <input type="checkbox" id="${id}-bookmark" class="bookmark-toggle" aria-label="Нэмэх дуртай" />
+          <label class="bookmark-label" for="${id}-bookmark" aria-hidden="true"></label>
           <figure class="thumb" role="img" aria-label="Зураг">
             <img src="${image}" alt="${alt}">
           </figure>

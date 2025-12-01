@@ -91,6 +91,22 @@ header.site {
     width: 100%;
 }
 
+.search button {
+    background: transparent;
+    border: 0;
+    padding: 0.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
 .actions {
     display: flex;
     gap: 0.6rem;
@@ -166,7 +182,14 @@ header.site {
 
 .status-dot {
     margin-right: 6px;
+}
+
+.status-dot.red {
     color: #ef4444;
+}
+
+.status-dot.green {
+    color: #10b981;
 }
 
 /* groups */
@@ -236,14 +259,48 @@ time {
 }
 
 
-.bookmark {
+.bookmark-toggle {
+
     position: absolute;
     right: 0.7rem;
     top: 0.7rem;
-    background: transparent;
-    border: 0;
-    padding: 6px;
-    font-size: 0.95rem;
+    width: 28px;
+    height: 28px;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.bookmark-label {
+    position: absolute;
+    right: 0.7rem;
+    top: 0.7rem;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #9aa4b2;
+    user-select: none;
+    pointer-events: auto;
+    cursor: pointer; 
+}
+
+.bookmark-toggle:focus + .bookmark-label {
+    outline: 2px solid rgba(24,168,97,0.22);
+    border-radius: 6px;
+}
+
+.bookmark-label::before {
+    content: '☆';
+}
+
+.bookmark-toggle:checked + .bookmark-label::before {
+    content: '★';
+    color: #ffb400;
 }
 
 
