@@ -74,7 +74,7 @@
           <label><input type="checkbox" name="feat" value="3" /> Сонголт 3</label>
         </fieldset>
 
-        
+        <!-- Шагнал (dual-range simulation using two ranges + JS) -->
         <div class="form-row">
           <label class="legend">Шагнал</label>
           <div class="range-wrap">
@@ -118,10 +118,10 @@
     <div class="container">© Ollo</div>
   </footer>
 
- 
+  <!-- Minimal JS: таб солих болон хоёр range-г уялдуулах -->
   <script>
     (function () {
-      
+      // Tabs
       const tabLost = document.getElementById('tab-lost');
       const tabFound = document.getElementById('tab-found');
       const form = document.getElementById('adForm');
@@ -145,7 +145,7 @@
       tabLost.addEventListener('click', () => setActiveTab('lost'));
       tabFound.addEventListener('click', () => setActiveTab('found'));
 
-     
+      // Dual range sync (min should not exceed max)
       const rangeMin = document.getElementById('rangeMin');
       const rangeMax = document.getElementById('rangeMax');
       const rangeMinVal = document.getElementById('rangeMinVal');
@@ -162,7 +162,7 @@
         let max = parseInt(rangeMax.value, 10);
 
         if (min > max) {
-          
+          // swap so the two handles don't cross
           const tmp = min;
           min = max;
           max = tmp;
@@ -173,13 +173,13 @@
         rangeMinVal.textContent = formatNumber(min);
         rangeMaxVal.textContent = formatNumber(max);
 
-        
+        // Update active track position and width
         const minPercent = (min / 200000) * 100;
         const maxPercent = (max / 200000) * 100;
         activeTrack.style.left = minPercent + '%';
         activeTrack.style.width = (maxPercent - minPercent) + '%';
 
-        
+        // Visually update z-index to show handles correctly
         if (parseInt(rangeMin.value, 10) > parseInt(rangeMax.value, 10)) {
           rangeMin.style.zIndex = 5;
           rangeMax.style.zIndex = 4;
@@ -192,7 +192,7 @@
       rangeMin.addEventListener('input', syncRanges);
       rangeMax.addEventListener('input', syncRanges);
 
-     
+      // initial
       syncRanges();
       setActiveTab('lost');
     })();

@@ -1,4 +1,4 @@
-
+/* Basic reset */
 * { box-sizing: border-box; }
 html, body {
     height: 100%;
@@ -8,7 +8,7 @@ html, body {
     background: #ffffff;
 }
 
-
+/* Layout */
 .container {
     max-width: 980px;
     margin: 0 auto;
@@ -26,6 +26,7 @@ html, body {
     border-bottom: 1px solid rgba(0,0,0,0.02);
 }
 
+/* Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -37,7 +38,7 @@ html, body {
 .logo-icon { font-size: 22px; }
 .logo-text { font-size: 18px; }
 
-
+/* Page title */
 .page-title {
     font-size: 30px;
     margin: 32px 0 10px;
@@ -49,7 +50,7 @@ html, body {
     color: #6b7280;
 }
 
-
+/* Tabs */
 .tabs {
     display: flex;
     width: 100%;
@@ -74,7 +75,7 @@ html, body {
     box-shadow: 0 4px 8px rgba(2,6,23,0.06);
 }
 
-
+/* Card / fieldset */
 .card {
     border: 1px solid rgba(0,0,0,0.06);
     background: #fff;
@@ -83,7 +84,7 @@ html, body {
     box-shadow: 0 10px 26px rgba(2,6,23,0.03);
 }
 
-
+/* Form rows */
 .form-row {
     margin-bottom: 22px;
     display: flex;
@@ -114,7 +115,7 @@ html, body {
     color: #9ca3af;
 }
 
-
+/* 2-column grid */
 .form-grid {
     display: flex;
     gap: 20px;
@@ -125,7 +126,7 @@ html, body {
     flex: 1;
 }
 
-
+/* Checkboxes / radios */
 .checkboxes {
     border: 0;
     padding: 0;
@@ -152,7 +153,7 @@ html, body {
     accent-color: #22a65b;
 }
 
-
+/* RANGE — dual handle in one line */
 .range-wrap {
     position: relative;
     height: 72px;
@@ -179,7 +180,7 @@ html, body {
     z-index: 5;
 }
 
-
+/* Track (transparent, we draw custom track below) */
 .range-wrap input[type="range"]::-webkit-slider-runnable-track {
     height: 6px;
     background: transparent;
@@ -193,7 +194,7 @@ html, body {
     border: none;
 }
 
-
+/* Thumb */
 .range-wrap input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     height: 22px;
@@ -230,7 +231,7 @@ html, body {
     z-index: 1;
 }
 
-
+/* Active selected range (JS updates left/width) */
 .range-wrap .active-track {
     position: absolute;
     top: 24px;
@@ -240,7 +241,7 @@ html, body {
     z-index: 2;
 }
 
-
+/* Range value labels */
 .range-values {
     display: flex;
     justify-content: space-between;
@@ -256,7 +257,7 @@ html, body {
     color: #374151;
 }
 
-
+/* Actions */
 .form-actions {
     display: flex;
     gap: 14px;
