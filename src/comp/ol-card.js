@@ -1,0 +1,57 @@
+class AdCard extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        const title = this.getAttribute('title') || '';
+        const image = this.getAttribute('image') || '../images/backpack.png';
+        const alt = this.getAttribute('alt') || 'Зураг';
+        const date = this.getAttribute('date') || '';
+        const location = this.getAttribute('location') || '';
+        const status = this.getAttribute('status') || 'lost'; // 'lost' or 'found'
+        const id = this.getAttribute('id') || 'ad-default';
+
+        const statusClass = status === 'found' ? 'green' : 'red';
+        const statusText = status === 'found' ? 'Олсон' : 'Хайж байна';
+
+        this.innerHTML = `
+        <article class="card" aria-labelledby="${id}">
+          <button class="bookmark" aria-label="Хадгалах">
+            <svg class="bookmark-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <figure class="thumb" role="img" aria-label="Зураг">
+            <img src="${image}" alt="${alt}">
+          </figure>
+          <h3 id="${id}" class="card-title"><span class="status-dot ${statusClass}" aria-hidden="true">●</span> ${title}</h3>
+          <p class="meta">
+            <img src="images/calendar.png" alt="" class="meta-icon" />
+            <span>${date}</span>
+          </p>
+          <p class="location">
+            <img src="images/location.png" alt="" class="meta-icon" />
+            <span>${location}</span>
+          </p>
+        </article>
+        `;
+
+        // Bookmark товч дээр click event нэмэх
+        setTimeout(() => {
+            const bookmarkBtn = this.querySelector('.bookmark');
+            if (bookmarkBtn) {
+                bookmarkBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    bookmarkBtn.classList.toggle('saved');
+                    const label = bookmarkBtn.classList.contains('saved') 
+                        ? 'Хадгалсан' 
+                        : 'Нэмэх дуртай';
+                    bookmarkBtn.setAttribute('aria-label', label);
+                });
+            }
+        }, 0);
+    }
+}
+
+window.customElements.define('ad-card', AdCard);

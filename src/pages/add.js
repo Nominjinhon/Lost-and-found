@@ -1,19 +1,10 @@
-<!doctype html>
-<html lang="mn">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Зар оруулах — Ollo</title>
-  <link rel="stylesheet" href="styles/Add.css" />
-  <link rel=stylesheet href="styles/Homepage.css" />
-  <script type="module" src="./comp/main-header.js" ></script>
-</head>
-<body>
-  
-
-  <main class="container" id="main" role="main">
-    <h1 class="page-title">Зар оруулах</h1>
-    <p class="lead">Эд зүйлийн талаарх нарийн мэдээлэл оруулна уу!</p>
+export function AddPage() {
+  return `
+    <article class="add-page">
+      <header>
+        <h1 class="page-title">Зар оруулах</h1>
+        <p class="lead">Эд зүйлийн талаарх нарийн мэдээлэл оруулна уу!</p>
+      </header>
 
     <form class="ad-form" id="adForm" action="#" method="post" novalidate>
       <!-- Tabs (semantic: role="tablist") -->
@@ -112,90 +103,6 @@
         </div>
       </fieldset>
     </form>
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">© Ollo</div>
-  </footer>
-
-  <!-- Minimal JS: таб солих болон хоёр range-г уялдуулах -->
-  <script>
-    (function () {
-      // Tabs
-      const tabLost = document.getElementById('tab-lost');
-      const tabFound = document.getElementById('tab-found');
-      const form = document.getElementById('adForm');
-
-      function setActiveTab(active) {
-        if (active === 'lost') {
-          tabLost.classList.add('tab--active');
-          tabFound.classList.remove('tab--active');
-          tabLost.setAttribute('aria-selected', 'true');
-          tabFound.setAttribute('aria-selected', 'false');
-          form.dataset.type = 'lost';
-        } else {
-          tabFound.classList.add('tab--active');
-          tabLost.classList.remove('tab--active');
-          tabFound.setAttribute('aria-selected', 'true');
-          tabLost.setAttribute('aria-selected', 'false');
-          form.dataset.type = 'found';
-        }
-      }
-
-      tabLost.addEventListener('click', () => setActiveTab('lost'));
-      tabFound.addEventListener('click', () => setActiveTab('found'));
-
-      // Dual range sync (min should not exceed max)
-      const rangeMin = document.getElementById('rangeMin');
-      const rangeMax = document.getElementById('rangeMax');
-      const rangeMinVal = document.getElementById('rangeMinVal');
-      const rangeMaxVal = document.getElementById('rangeMaxVal');
-      const activeTrack = document.querySelector('.active-track');
-      const rangeWrap = document.querySelector('.range-wrap');
-
-      function formatNumber(n){
-        return Number(n).toLocaleString('en-US');
-      }
-
-      function syncRanges() {
-        let min = parseInt(rangeMin.value, 10);
-        let max = parseInt(rangeMax.value, 10);
-
-        if (min > max) {
-          // swap so the two handles don't cross
-          const tmp = min;
-          min = max;
-          max = tmp;
-          rangeMin.value = min;
-          rangeMax.value = max;
-        }
-
-        rangeMinVal.textContent = formatNumber(min);
-        rangeMaxVal.textContent = formatNumber(max);
-
-        // Update active track position and width
-        const minPercent = (min / 200000) * 100;
-        const maxPercent = (max / 200000) * 100;
-        activeTrack.style.left = minPercent + '%';
-        activeTrack.style.width = (maxPercent - minPercent) + '%';
-
-        // Visually update z-index to show handles correctly
-        if (parseInt(rangeMin.value, 10) > parseInt(rangeMax.value, 10)) {
-          rangeMin.style.zIndex = 5;
-          rangeMax.style.zIndex = 4;
-        } else {
-          rangeMin.style.zIndex = 4;
-          rangeMax.style.zIndex = 5;
-        }
-      }
-
-      rangeMin.addEventListener('input', syncRanges);
-      rangeMax.addEventListener('input', syncRanges);
-
-      // initial
-      syncRanges();
-      setActiveTab('lost');
-    })();
-  </script>
-</body>
-</html>
+    </article>
+  `;
+}
