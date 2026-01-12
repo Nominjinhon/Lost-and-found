@@ -36,7 +36,7 @@ function router() {
     app.innerHTML = view();
 }
 
-// Handle hash changes
+
 window.addEventListener('hashchange', router);
-// Initial load
+
 router();

@@ -2,12 +2,7 @@ import { adsData } from '../data/ads.js';
 
 export function HomePage() {
   const html = `
-    <form class="search-main" role="search" aria-label="Хайлт">
-      <input id="search-input" type="search" placeholder="Хайлт хийх" />
-      <button type="submit" aria-label="Хайх">
-        <img src="images/search.png" alt="" class="search-icon" />
-      </button>
-    </form>
+    <main-search></main-search>
 
     <header class="hero-row" aria-labelledby="all-ads">
       <h1 id="all-ads" class="page-title">Бүх зар</h1>
@@ -30,21 +25,10 @@ export function HomePage() {
       ${renderDefaultView()}
     </section>
 
-    <footer class="site" role="contentinfo">
-      <nav aria-label="Footer links">
-        <a href="#">Бидний тухай</a>
-        <a href="#">Холбогдох</a>
-        <a href="#">Тусламж</a>
-      </nav>
-      <address class="brand-addr" aria-label="Холбоо">
-        <img src="images/logo.png" alt="Ollo Logo" class="footer-logo" />
-        <span>Ollo</span>
-      </address>
-      <small class="copyright">TeamName © 2025. Бүх эрх хуулиар хамгаалагдсан.</small>
-    </footer>
+    <main-footer></main-footer>
   `;
 
-  // Setup event listener after render
+  
   setTimeout(() => {
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) {
@@ -126,3 +110,6 @@ function handleSortChange(e) {
     container.innerHTML = renderSortedView(sortedAds);
   }
 }
+
+
+
