@@ -12,17 +12,12 @@ export function HomePage() {
       </aside>
     </header>
 
-    <nav class="sort-controls" aria-label="Эрэмбэлэх">
-      <img src="images/sort.png" alt="" class="sort-icon" />
-      <select id="sortSelect" class="sort-select">
-        <option value="default">Үндсэн</option>
-        <option value="alphabet">Үсгээр (А-Я)</option>
-        <option value="date">Хугацаагаар (Шинэ → Хуучин)</option>
-      </select>
-    </nav>
+    <section class="home-layout" aria-label="Ads and filters">
+      <filter-sidebar class="home-layout__sidebar"></filter-sidebar>
 
-    <section id="ads-container">
-      ${renderDefaultView()}
+      <section id="ads-container" class="home-layout__content">
+        ${renderDefaultView()}
+      </section>
     </section>
 
     <main-footer></main-footer>
