@@ -3,40 +3,47 @@ import { AddPage } from '../pages/add.js';
 import { LoginPage } from '../pages/login.js';
 import { RegisterPage } from '../pages/register.js';
 
-function router() {
+class OlRouter extends HTMLElement {
+  connectedCallback() {
+    this.loadRoute();
+    // url uurchlugduh bolgond loadRoute ajillana
+    window.addEventListener('hashchange', () => this.loadRoute());
+  }
+
+  loadRoute() {
+    const hash = window.location.hash.replace('#', '');
+    const [page] = hash.split('?');
     const app = document.getElementById('app');
-    let path = location.hash.slice(1) || '/';
-    
-    if (path.startsWith('/')) {
-        path = path.slice(1);
-    }
 
     let view;
 
-    switch (path) {
-        case '':
-        case '/':
-            view = HomePage;
-            break;
-        case 'add':
-        case 'add-ad':
-            view = AddPage;
-            break;
-        case 'login':
-            view = LoginPage;
-            break;
-        case 'register':
-        case 'signup':
-            view = RegisterPage;
-            break;
-        default:
-            view = HomePage;
+    switch (page) {
+      case '':
+      case '/':
+        view = HomePage;
+        break;
+      case 'add':
+      case '/add':
+      case 'add-ad':
+      case '/add-ad':
+        view = AddPage;
+        break;
+      case 'login':
+      case '/login':
+        view = LoginPage;
+        break;
+      case 'register':
+      case '/register':
+      case 'signup':
+      case '/signup':
+        view = RegisterPage;
+        break;
+      default:
+        view = HomePage;
     }
 
-    app.innerHTML = view();
+    if (app) app.innerHTML = view();
+  }
 }
 
-
-window.addEventListener('hashchange', router);
-
-router();
+customElements.define('ol-router', OlRouter);

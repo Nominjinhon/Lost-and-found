@@ -5,9 +5,9 @@ class MainSearch extends HTMLElement {
 
   connectedCallback() {
     this.innerHTML = `
-      <form class="search-main" role="search" aria-label="D�D�D1D��,">
-        <input id="search-input" type="search" placeholder="D�D�D1D��, �.D,D1�." />
-        <button type="submit" aria-label="D�D�D1�.">
+      <form class="search-main" role="search" aria-label="Хайлт хийх">
+        <input id="search-input" type="search" placeholder="Хайх зүйлээ оруулна уу..." />
+        <button type="submit" aria-label="Хайх">
           <img src="images/search.png" alt="" class="search-icon" />
         </button>
       </form>
