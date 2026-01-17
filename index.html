@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="mn">
 <head>
+  
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ollo — Алдсан зүйлсээ олох платформ</title>
@@ -12,11 +13,18 @@
   <main role="main" class="container" id="app"></main>
   <ol-router></ol-router>
 
+  <script type="module" src="./src/comp/ol-router.js"></script>
   <script type="module" src="./src/comp/ol-header.js"></script>
+
+  <!-- бусад component хэрэгтэй бол -->
   <script type="module" src="./src/comp/ol-search.js"></script>
   <script type="module" src="./src/comp/ol-footer.js"></script>
   <script type="module" src="./src/comp/ol-card.js"></script>
-  <script type="module" src="./src/comp/ol-router.js"></script>
+
+  <!-- notification component-ууд -->
+  <script type="module" src="./src/comp/ol-app-notification.js"></script>
+  <script type="module" src="./src/comp/ol-notification-menu.js"></script>
 </body>
+
 </html>
 

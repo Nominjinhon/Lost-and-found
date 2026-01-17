@@ -15,12 +15,20 @@ class MainHeader extends HTMLElement {
       <nav class="actions" aria-label="Үйлдлүүд">
         <a class="outline-btn" href="#my-ads">Миний зар</a>
         <a class="btn" href="#add">Зар нэмэх</a>
+            <app-notification count="1"></app-notification>
+            <notification-menu></notification-menu>
         <a class="profile-link" href="#profile" aria-label="Профайл">
           <img src="images/user.png" alt="Хэрэглэгчийн профайл" class="profile-icon" />
         </a>
       </nav>
     </div>
   </header>`;
+
+  const bell = this.querySelector("app-notification");
+    const menu = this.querySelector("notification-menu");
+    if (bell && menu) {
+      bell.addEventListener("toggle", () => menu.toggle());
+    }
        
     }
 

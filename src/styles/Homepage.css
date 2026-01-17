@@ -171,6 +171,65 @@ header.site {
     display: block;
 }
 
+/* === Notification icon = Profile icon style === */
+app-notification .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid rgba(7,22,51,0.12);
+
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(2,6,23,0.06);
+    flex-shrink: 0;
+
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Hover — яг profile шиг */
+app-notification .icon-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(24,168,97,0.15);
+    background: #fafffe;
+}
+
+/* Active — яг profile шиг */
+app-notification .icon-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(24,168,97,0.08);
+}
+
+/* Bell icon size = profile icon size */
+app-notification svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+}
+
+app-notification .notif-btn {
+    position: relative;
+}
+
+.notif-dot {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22a65b;
+    border: 2px solid #ffffff; /* дугуй дээр цэвэр суух */
+}
+
 .btn,
 .outline-btn {
     padding: 0.55rem 1.1rem;
