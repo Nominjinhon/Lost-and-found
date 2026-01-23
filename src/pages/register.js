@@ -1,5 +1,7 @@
 export function RegisterPage() {
   return `
+    <main-header></main-header>
+    <div class="container">
     <section class="register-page">
       <article class="form-box">
         <header>
@@ -41,6 +43,7 @@ export function RegisterPage() {
         </form>
       </article>
     </section>
+    </div>
   `;
 }
 

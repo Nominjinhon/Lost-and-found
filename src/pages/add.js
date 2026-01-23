@@ -1,10 +1,7 @@
 export function AddPage() {
   return `
+    <main-header></main-header>
     <article class="add-page">
-      <header>
-        <h1 class="page-title">Зар оруулах</h1>
-        <p class="lead">Эд зүйлийн талаарх нарийн мэдээлэл оруулна уу!</p>
-      </header>
 
     <form class="ad-form" id="adForm" action="#" method="post" novalidate>
       <!-- Tabs (semantic: role="tablist") -->

@@ -2,6 +2,7 @@ import { HomePage } from '../pages/home.js';
 import { AddPage } from '../pages/add.js';
 import { LoginPage } from '../pages/login.js';
 import { RegisterPage } from '../pages/register.js';
+import { ProfilePage } from '../pages/profile.js';
 
 class OlRouter extends HTMLElement {
   connectedCallback() {
@@ -37,6 +38,10 @@ class OlRouter extends HTMLElement {
       case 'signup':
       case '/signup':
         view = RegisterPage;
+        break;
+      case 'profile':
+      case '/profile':
+        view = ProfilePage;
         break;
       default:
         view = HomePage;

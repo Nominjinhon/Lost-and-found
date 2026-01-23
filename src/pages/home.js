@@ -2,6 +2,9 @@ import { adsData } from '../data/ads.js';
 
 export function HomePage() {
   const html = `
+    <main-header></main-header>
+
+    <div class="container">
     <main-search></main-search>
 
     <header class="hero-row" aria-labelledby="all-ads">
@@ -21,9 +24,10 @@ export function HomePage() {
     </section>
 
     <main-footer></main-footer>
+    </div>
   `;
 
-  
+
   setTimeout(() => {
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) {
@@ -88,20 +92,20 @@ function createAdCard(ad) {
 function handleSortChange(e) {
   const sortValue = e.target.value;
   const container = document.getElementById('ads-container');
-  
+
   if (!container) return;
 
   if (sortValue === 'default') {
     container.innerHTML = renderDefaultView();
   } else {
     let sortedAds = [...adsData];
-    
+
     if (sortValue === 'alphabet') {
       sortedAds.sort((a, b) => a.title.localeCompare(b.title, 'mn'));
     } else if (sortValue === 'date') {
       sortedAds.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
-    
+
     container.innerHTML = renderSortedView(sortedAds);
   }
 }

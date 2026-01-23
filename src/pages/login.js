@@ -1,5 +1,7 @@
 export function LoginPage() {
   return `
+    <main-header></main-header>
+    <div class="container">
     <article class="login-page">
       <header>
         <h1>Тавтай морил</h1>
@@ -28,5 +30,6 @@ export function LoginPage() {
         <p>Бүртгэл байхгүй юу? <a href="#register">Бүртгүүлэх</a></p>
       </footer>
     </article>
+    </div>
   `;
 }
