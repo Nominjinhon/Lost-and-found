@@ -5,9 +5,10 @@ class FilterSidebar extends HTMLElement {
 
     this.state = {
       type: this.getAttribute("type") || "lost",
-      locations: new Set(),
+      location: "Улаанбаатар", // Default location
       categories: new Set(),
-      date: this.getAttribute("date") || null,
+      startDate: null,
+      endDate: null,
       monthOffset: 0,
     };
 
@@ -16,25 +17,6 @@ class FilterSidebar extends HTMLElement {
   }
 
   connectedCallback() {
-    const locationsAttr = this.getAttribute("locations");
-    const categoriesAttr = this.getAttribute("categories");
-
-    if (locationsAttr) {
-      locationsAttr
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .forEach((v) => this.state.locations.add(v));
-    }
-
-    if (categoriesAttr) {
-      categoriesAttr
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean)
-        .forEach((v) => this.state.categories.add(v));
-    }
-
     this.render();
     this.shadowRoot.addEventListener("click", this._onClick);
     this.shadowRoot.addEventListener("change", this._onChange);
@@ -48,9 +30,10 @@ class FilterSidebar extends HTMLElement {
   get value() {
     return {
       type: this.state.type,
-      locations: Array.from(this.state.locations),
+      location: this.state.location,
       categories: Array.from(this.state.categories),
-      date: this.state.date,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
     };
   }
 
@@ -67,9 +50,10 @@ class FilterSidebar extends HTMLElement {
 
       if (action === "clear") {
         this.state.type = "lost";
-        this.state.locations.clear();
+        this.state.location = "Улаанбаатар";
         this.state.categories.clear();
-        this.state.date = null;
+        this.state.startDate = null;
+        this.state.endDate = null;
         this.state.monthOffset = 0;
         this.render();
         this._emit();
@@ -92,7 +76,21 @@ class FilterSidebar extends HTMLElement {
     const dayBtn = e.target.closest("button[data-date]");
     if (dayBtn) {
       const iso = dayBtn.getAttribute("data-date");
-      this.state.date = this.state.date === iso ? null : iso;
+
+      if (!this.state.startDate || (this.state.startDate && this.state.endDate)) {
+        // New range start
+        this.state.startDate = iso;
+        this.state.endDate = null;
+      } else if (this.state.startDate && !this.state.endDate) {
+        // Range end?
+        if (new Date(iso) < new Date(this.state.startDate)) {
+          // User clicked earlier date, swap or reset? Let's just reset start
+          this.state.startDate = iso;
+        } else {
+          this.state.endDate = iso;
+        }
+      }
+
       this.render();
       this._emit();
     }
@@ -108,8 +106,7 @@ class FilterSidebar extends HTMLElement {
     }
 
     if (t.name === "fs-location") {
-      const v = t.value;
-      t.checked ? this.state.locations.add(v) : this.state.locations.delete(v);
+      this.state.location = t.value;
       this._emit();
       return;
     }
@@ -122,21 +119,33 @@ class FilterSidebar extends HTMLElement {
   }
 
   _getLists() {
-    const locOpt = this.getAttribute("location-options");
-    const catOpt = this.getAttribute("category-options");
-
-    let locations = [
+    // List of Mongolia's 21 Aimags + Ulaanbaatar
+    const locations = [
       "Улаанбаатар",
-      "Дархан",
-      "Эрдэнэт",
+      "Архангай",
+      "Баян-Өлгий",
       "Баянхонгор",
+      "Булган",
+      "Говь-Алтай",
+      "Говьсүмбэр",
+      "Дархан-Уул",
+      "Дорноговь",
+      "Дорнод",
+      "Дундговь",
       "Завхан",
-      "Хөвсгөл",
       "Орхон",
+      "Өвөрхангай",
       "Өмнөговь",
+      "Сүхбаатар",
+      "Сэлэнгэ",
+      "Төв",
+      "Увс",
+      "Ховд",
+      "Хөвсгөл",
+      "Хэнтий"
     ];
 
-    let categories = [
+    const categories = [
       "Гар утас",
       "Түрийвч",
       "Түлхүүр",
@@ -145,9 +154,6 @@ class FilterSidebar extends HTMLElement {
       "Цаг",
       "Бусад",
     ];
-
-    try { if (locOpt) locations = JSON.parse(locOpt); } catch {}
-    try { if (catOpt) categories = JSON.parse(catOpt); } catch {}
 
     return { locations, categories };
   }
@@ -167,7 +173,7 @@ class FilterSidebar extends HTMLElement {
     for (let d = 1; d <= lastDate; d++) grid.push(d);
     while (grid.length % 7 !== 0) grid.push(null);
 
-    const monthName = view.toLocaleString("en-US", { month: "long" });
+    const monthName = view.toLocaleString("mn-MN", { month: "long" }); // Use Mongolian locale if available
     return { year, month, monthName, grid };
   }
 
@@ -181,31 +187,20 @@ class FilterSidebar extends HTMLElement {
     const { locations, categories } = this._getLists();
     const { year, month, monthName, grid } = this._calendarData();
 
-    const selectedCity = Array.from(this.state.locations)[0] || "Улаанбаатар";
+    // Location Dropdown Options
+    const locOptions = locations.map(city =>
+      `<option value="${city}" ${this.state.location === city ? "selected" : ""}>${city}</option>`
+    ).join("");
 
-    const locItems = locations
-      .map(
-        (city) => `
-          <li>
-            <label class="check">
-              <input type="checkbox" name="fs-location" value="${city}" ${
-          this.state.locations.has(city) ? "checked" : ""
-        } />
-              <span>${city}</span>
-            </label>
-          </li>
-        `
-      )
-      .join("");
 
+    // Categories Checkboxes
     const catItems = categories
       .map(
         (cat) => `
           <li>
             <label class="check">
-              <input type="checkbox" name="fs-category" value="${cat}" ${
-          this.state.categories.has(cat) ? "checked" : ""
-        } />
+              <input type="checkbox" name="fs-category" value="${cat}" ${this.state.categories.has(cat) ? "checked" : ""
+          } />
               <span>${cat}</span>
             </label>
           </li>
@@ -213,22 +208,33 @@ class FilterSidebar extends HTMLElement {
       )
       .join("");
 
-    const calCells = grid
-      .map((d) => {
-        if (!d) return `<li class="cell cell--empty" aria-hidden="true"></li>`;
-        const iso = this._toISO(year, month, d);
-        const selected = this.state.date === iso ? "cell--selected" : "";
-        return `
+    // Calendar Cells
+    const calCells = grid.map((d) => {
+      if (!d) return `<li class="cell cell--empty" aria-hidden="true"></li>`;
+
+      const iso = this._toISO(year, month, d);
+      let classes = ["cell"];
+
+      // Range Selection Logic
+      if (this.state.startDate === iso) classes.push("cell--start");
+      if (this.state.endDate === iso) classes.push("cell--end");
+
+      if (this.state.startDate && this.state.endDate) {
+        if (iso > this.state.startDate && iso < this.state.endDate) {
+          classes.push("cell--in-range");
+        }
+      } else if (this.state.startDate === iso) {
+        classes.push("cell--selected"); // Provide visual feedback for single selection too
+      }
+
+      return `
           <li>
-            <button type="button" class="cell ${selected}" data-date="${iso}" aria-pressed="${
-          selected ? "true" : "false"
-        }">
+            <button type="button" class="${classes.join(" ")}" data-date="${iso}">
               ${String(d).padStart(2, "0")}
             </button>
           </li>
         `;
-      })
-      .join("");
+    }).join("");
 
     this.shadowRoot.innerHTML = `
       <style>
@@ -247,11 +253,11 @@ class FilterSidebar extends HTMLElement {
 
         aside{
           width:100%;
-          max-width:92vw;
+          max-width:300px; /* Sidebar width adjustment */
           background:var(--fs-card);
           border:1px solid var(--fs-border);
           border-radius:var(--radius);
-          padding:16px 14px;
+          padding:20px;
           box-shadow: var(--fs-shadow);
         }
 
@@ -260,37 +266,47 @@ class FilterSidebar extends HTMLElement {
           align-items:flex-start;
           justify-content:space-between;
           gap:10px;
-          margin-bottom:10px;
+          margin-bottom:20px;
+          border-bottom: 1px solid var(--fs-border);
+          padding-bottom: 15px;
         }
 
         fieldset{
           border:0;
           padding:0;
           margin:0;
-          display:grid;
+          display:flex; /* Toggle style */
           gap:10px;
-          min-inline-size:0;
+          background: #f1f3f5;
+          padding: 4px;
+          border-radius: 12px;
         }
 
-        legend{
-          position:absolute;
-          inline-size:1px;
-          block-size:1px;
-          overflow:hidden;
-          clip:rect(0 0 0 0);
-          white-space:nowrap;
+        /* Toggle Button Style for Type */
+        label.radio {
+            position: relative;
+            cursor: pointer;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--fs-muted);
+            transition: all 0.2s;
+            border-radius: 8px;
+            z-index: 1;
         }
 
-        label.radio{
-          display:inline-flex;
-          align-items:center;
-          gap:10px;
-          font-weight:600;
+        label.radio input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
         }
-        label.radio input{
-          width:18px;
-          height:18px;
-          accent-color:var(--fs-accent);
+
+        label.radio:has(input:checked) {
+            background-color: #fff;
+            color: var(--fs-text);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         button.clear{
@@ -299,90 +315,68 @@ class FilterSidebar extends HTMLElement {
           color:var(--fs-muted);
           font-weight:600;
           cursor:pointer;
-          padding:6px 8px;
-          border-radius:10px;
+          font-size: 0.9rem;
         }
-        button.clear:hover{ background:rgba(24,168,97,0.08); }
+        button.clear:hover{ text-decoration: underline; color: var(--fs-accent); }
 
-        section{ padding:10px 0 2px; }
+        section{ margin-bottom: 24px; }
 
         h3{
-          margin:10px 0 10px;
-          font-size:1.05rem;
-          letter-spacing:-0.01em;
+          margin:0 0 12px;
+          font-size:1rem;
           font-weight:700;
           color: var(--fs-text);
+          display: flex;
+          align-items: center;
+          gap: 8px;
         }
 
+        /* Dropdown Style */
+        select.location-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--fs-border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: var(--fs-text);
+            background-color: #fff;
+            outline: none;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+        }
+        select.location-select:focus {
+            border-color: var(--fs-accent);
+            box-shadow: 0 0 0 3px rgba(24,168,97,0.1);
+        }
+
+        /* Checkboxes List */
         ul.scroll{
           list-style:none;
           margin:0;
-          padding:0 6px 0 0;
-          max-height:150px;
-          overflow:auto;
+          padding:0;
           display:grid;
-          gap:10px;
+          gap:12px;
         }
-
-        ul.scroll::-webkit-scrollbar{ width:8px; }
-        ul.scroll::-webkit-scrollbar-thumb{ background:rgba(107,114,128,0.45); border-radius:99px; }
-        ul.scroll::-webkit-scrollbar-track{ background:transparent; }
 
         label.check{
           display:inline-flex;
           align-items:center;
           gap:10px;
-          font-weight:600;
-          color:var(--fs-muted);
+          font-weight:500;
+          color:var(--fs-text);
+          cursor: pointer;
+          font-size: 0.95rem;
         }
         label.check input{
           width:18px;
           height:18px;
-          border-radius:6px;
+          border-radius:4px;
           accent-color:var(--fs-accent);
-        }
-
-        figure.map{
-          margin:10px 0 0;
-          height:92px;
-          border-radius:16px;
-          border:1px solid var(--fs-border);
-          background:#fff;
-          position:relative;
-          overflow:hidden;
-
-          background-image:
-            radial-gradient(circle at 20% 30%, rgba(24,168,97,.18), transparent 32%),
-            radial-gradient(circle at 70% 55%, rgba(24,168,97,.12), transparent 35%),
-            linear-gradient(0deg, rgba(31,42,68,.06), rgba(31,42,68,.06));
-        }
-
-        figcaption.badge{
-          position:absolute;
-          inset:auto auto 10px 10px;
-          display:flex;
-          align-items:center;
-          gap:10px;
-          background:rgba(255,255,255,0.92);
-          border:1px solid var(--fs-border);
-          border-radius:14px;
-          padding:8px 10px;
-          box-shadow:0 10px 18px rgba(0,0,0,0.06);
-        }
-
-        i.pin{
-          inline-size:10px;
-          block-size:10px;
-          background:#ef4444;
-          border-radius:999px;
-          box-shadow:0 0 0 4px rgba(239,68,68,.18);
-        }
-
-        figcaption small{
-          display:block;
-          color:var(--fs-muted);
-          font-size:12px;
-          margin-top:2px;
+          cursor: pointer;
         }
 
         /* Calendar */
@@ -397,32 +391,37 @@ class FilterSidebar extends HTMLElement {
           display:flex;
           align-items:center;
           justify-content:space-between;
-          margin-bottom:8px;
+          margin-bottom:12px;
         }
 
-        nav.month strong{ font-weight:700; }
+        nav.month strong{ font-weight:700; color: var(--fs-text); font-size: 0.95rem; }
 
         nav.month button{
-          width:34px;
-          height:34px;
-          border-radius:12px;
+          width:28px;
+          height:28px;
+          border-radius:8px;
           border:1px solid var(--fs-border);
           background:#fff;
           cursor:pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--fs-muted);
         }
-        nav.month button:hover{ background:rgba(24,168,97,0.08); }
+        nav.month button:hover{ background:rgba(24,168,97,0.08); color: var(--fs-accent); }
 
         ol.dow{
           list-style:none;
-          margin:0 0 6px;
+          margin:0 0 8px;
           padding:0;
           display:grid;
           grid-template-columns:repeat(7,1fr);
-          gap:6px;
+          gap:4px;
           color:var(--fs-muted);
-          font-weight:700;
-          font-size:12px;
-          text-transform:lowercase;
+          font-weight:600;
+          font-size:11px;
+          text-transform:uppercase;
+          text-align: center;
         }
 
         ol.grid{
@@ -431,34 +430,56 @@ class FilterSidebar extends HTMLElement {
           padding:0;
           display:grid;
           grid-template-columns:repeat(7,1fr);
-          gap:6px;
+          gap:4px;
         }
 
         .cell{
           display:grid;
           place-items:center;
-          height:34px;
-          border-radius:10px;
+          height:32px;
+          border-radius:8px;
           border:1px solid transparent;
           background:#fff;
           cursor:pointer;
-          font-weight:700;
+          font-weight:500;
           color:var(--fs-text);
           width:100%;
+          font-size: 0.9rem;
+          padding: 0;
         }
 
         li.cell.cell--empty{
-          height:34px;
-          border-radius:10px;
+          height:32px;
           background:transparent;
         }
 
-        .cell:hover{ border-color:rgba(24,168,97,0.45); }
-        .cell--selected{ background:var(--fs-accent); color:#ffffff; border-color: rgba(24,168,97,0.65); }
-
-        @media (max-width:420px){
-          aside{ max-width:100%; }
+        .cell:hover{ background:rgba(24,168,97,0.1); color: var(--fs-accent); }
+        
+        .cell--selected {
+            background: var(--fs-accent);
+            color: #fff;
         }
+
+        .cell--start {
+            background: var(--fs-accent);
+            color: #fff;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .cell--end {
+            background: var(--fs-accent);
+            color: #fff;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .cell--in-range {
+            background: rgba(24,168,97,0.15);
+            color: var(--fs-accent);
+            border-radius: 0;
+        }
+
       </style>
 
       <aside aria-label="Filter sidebar">
@@ -467,16 +488,14 @@ class FilterSidebar extends HTMLElement {
             <legend>Төрөл</legend>
 
             <label class="radio">
-              <input type="radio" name="fs-type" value="lost" ${
-                this.state.type === "lost" ? "checked" : ""
-              } />
+              <input type="radio" name="fs-type" value="lost" ${this.state.type === "lost" ? "checked" : ""
+      } />
               <span>Хаясан</span>
             </label>
 
             <label class="radio">
-              <input type="radio" name="fs-type" value="found" ${
-                this.state.type === "found" ? "checked" : ""
-              } />
+              <input type="radio" name="fs-type" value="found" ${this.state.type === "found" ? "checked" : ""
+      } />
               <span>Олсон</span>
             </label>
           </fieldset>
@@ -486,34 +505,22 @@ class FilterSidebar extends HTMLElement {
 
         <section aria-label="Байршлын шүүлтүүр">
           <h3>Хаана</h3>
-
-          <ul class="scroll" aria-label="Хот сонгох">
-            ${locItems}
-          </ul>
-
-          <figure class="map" role="img" aria-label="Map preview">
-            <figcaption class="badge">
-              <i class="pin" aria-hidden="true"></i>
-              <span>
-                <strong>${selectedCity}</strong>
-                <small>${selectedCity}</small>
-              </span>
-            </figcaption>
-          </figure>
+          <select name="fs-location" class="location-select" aria-label="Байршил сонгох">
+            ${locOptions}
+          </select>
         </section>
 
         <section class="calendar" aria-label="Огнооны шүүлтүүр">
           <h3>Хэзээ</h3>
-
           <article aria-label="Calendar widget">
             <nav class="month" aria-label="Сар сонгох">
-              <button type="button" data-action="prev-month" aria-label="Өмнөх сар">‹</button>
+              <button type="button" data-action="prev-month" aria-label="Өмнөх сар">❮</button>
               <strong>${monthName}</strong>
-              <button type="button" data-action="next-month" aria-label="Дараагийн сар">›</button>
+              <button type="button" data-action="next-month" aria-label="Дараагийн сар">❯</button>
             </nav>
 
             <ol class="dow" aria-hidden="true">
-              <li>m</li><li>t</li><li>w</li><li>t</li><li>f</li><li>s</li><li>s</li>
+              <li>Да</li><li>Мя</li><li>Лх</li><li>Пү</li><li>Ба</li><li>Бя</li><li>Ня</li>
             </ol>
 
             <ol class="grid" aria-label="Өдрүүд">

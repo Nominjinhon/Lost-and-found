@@ -1,6 +1,5 @@
 export function LoginPage() {
   return `
-    <main-header></main-header>
     <div class="container">
     <article class="login-page">
       <header>

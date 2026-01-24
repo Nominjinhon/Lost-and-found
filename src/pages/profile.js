@@ -6,55 +6,70 @@ export function ProfilePage() {
 
     const html = `
     <main-header></main-header>
-    <article class="profile-page">
-        <header class="profile-header container">
-            <img src="images/avatar_placeholder.png" alt="Profile" class="profile-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Bat+Erdene&background=18a861&color=fff'">
-            <div class="profile-info">
-                <h1 class="profile-name">Бат-Эрдэнэ</h1>
-                <p class="profile-email">bat.erdene@example.com</p>
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <span class="stat-value">12</span>
-                        <span class="stat-label">Нийт зар</span>
+    <article class="profile-page container">
+        <div class="profile-layout">
+            <aside class="profile-sidebar">
+                <section class="profile-card" aria-label="Хэрэглэгчийн мэдээлэл">
+                    <img src="images/avatar_placeholder.png" alt="Profile" class="profile-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Bat+Erdene&background=18a861&color=fff'">
+                    <h1 class="profile-name">Бат-Эрдэнэ</h1>
+                    <p class="profile-email">bat.erdene@example.com</p>
+                    
+                    <dl class="profile-stats">
+                        <div class="stat-item">
+                            <dd class="stat-value">12</dd>
+                            <dt class="stat-label">Нийт зар</dt>
+                        </div>
+                        <div class="stat-item">
+                            <dd class="stat-value">8</dd>
+                            <dt class="stat-label">Олсон</dt>
+                        </div>
+                        <div class="stat-item">
+                            <dd class="stat-value">4</dd>
+                            <dt class="stat-label">Идэвхтэй</dt>
+                        </div>
+                    </dl>
+
+                    <nav class="profile-actions" aria-label="Хэрэглэгчийн цэс">
+                        <button class="btn outline-btn full-width">Профайл засах</button>
+                        <button class="btn outline-btn full-width icon-btn">
+                            <i class="icon-notification"></i> Мэдэгдэл
+                        </button>
+                        <button class="btn outline-btn full-width icon-btn">
+                            <i class="icon-settings"></i> Тохиргоо
+                        </button>
+                        <button class="btn outline-btn full-width icon-btn logout-btn">
+                            <i class="icon-logout"></i> Гарах
+                        </button>
+                    </nav>
+                </section>
+            </aside>
+
+            <section class="profile-content" aria-label="Зарын жагсаалт">
+                <nav class="profile-tabs" aria-label="Төлөв">
+                    <button class="tab-btn active" data-tab="active">Идэвхтэй зарууд</button>
+                    <button class="tab-btn" data-tab="archived">Олдсон зарууд</button>
+                    <button class="tab-btn" data-tab="saved">Хадгалсан</button>
+                </nav>
+
+                <section id="active-ads" class="tab-content" role="tabpanel">
+                    <div class="cards">
+                        ${myAds.map(ad => createAdCard(ad)).join('')}
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value">8</span>
-                        <span class="stat-label">Олсон</span>
+                </section>
+
+                <section id="archived-ads" class="tab-content" role="tabpanel" style="display: none;">
+                    <div class="cards">
+                        ${archivedAds.map(ad => createAdCard(ad)).join('')}
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value">4</span>
-                        <span class="stat-label">Идэвхтэй</span>
+                </section>
+
+                <section id="saved-ads" class="tab-content" role="tabpanel" style="display: none;">
+                    <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--muted);">
+                        <p>Хадгалсан зар байхгүй байна.</p>
                     </div>
-                </div>
-            </div>
-            <button class="btn outline-btn">Профайл засах</button>
-        </header>
-
-        <section class="container">
-            <div class="profile-tabs">
-                <button class="tab-btn active" data-tab="active">Идэвхтэй зарууд</button>
-                <button class="tab-btn" data-tab="archived">Архивлагдсан</button>
-                <button class="tab-btn" data-tab="saved">Хадгалсан</button>
-            </div>
-
-            <div id="active-ads" class="tab-content">
-                <div class="cards">
-                    ${myAds.map(ad => createAdCard(ad)).join('')}
-                </div>
-            </div>
-
-            <div id="archived-ads" class="tab-content" style="display: none;">
-                <div class="cards">
-                    ${archivedAds.map(ad => createAdCard(ad)).join('')}
-                </div>
-            </div>
-
-            <div id="saved-ads" class="tab-content" style="display: none;">
-                <div class="empty-state" style="text-align: center; padding: 2rem; color: var(--muted);">
-                    <p>Хадгалсан зар байхгүй байна.</p>
-                </div>
-            </div>
-        </section>
+                </section>
+            </section>
+        </div>
     </article>
     `;
 

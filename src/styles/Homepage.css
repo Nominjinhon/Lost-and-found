@@ -4,7 +4,7 @@
     --muted: #6b7280;
     --bg: #f8fbf7;
     --card: #ffffff;
-    --shadow: 0 8px 22px rgba(2,6,23,0.06);
+    --shadow: 0 8px 22px rgba(2, 6, 23, 0.06);
     --gap: 1rem;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
@@ -37,9 +37,9 @@ img {
 }
 
 header.site {
-    background: linear-gradient(180deg, rgba(24,168,97,0.07), rgba(255,255,255,0));
+    background: linear-gradient(180deg, rgba(24, 168, 97, 0.07), rgba(255, 255, 255, 0));
     position: relative;
-    border-bottom: 1px solid rgba(7,22,51,0.04);
+    border-bottom: 1px solid rgba(7, 22, 51, 0.04);
 }
 
 .top-row {
@@ -80,15 +80,15 @@ header.site {
     padding: 0.8rem 1.2rem;
     border-radius: 16px;
     background: #fff;
-    border: 1px solid rgba(7,22,51,0.06);
-    box-shadow: 0 4px 20px rgba(2,6,23,0.06);
+    border: 1px solid rgba(7, 22, 51, 0.06);
+    box-shadow: 0 4px 20px rgba(2, 6, 23, 0.06);
     margin-bottom: 2rem;
     transition: all 0.2s ease;
 }
 
 .search-main:focus-within {
     border-color: var(--accent);
-    box-shadow: 0 4px 20px rgba(24,168,97,0.15);
+    box-shadow: 0 4px 20px rgba(24, 168, 97, 0.15);
 }
 
 .search-main input {
@@ -146,22 +146,22 @@ header.site {
     height: 44px;
     border-radius: 50%;
     background: #ffffff;
-    border: 2px solid rgba(7,22,51,0.12);
+    border: 2px solid rgba(7, 22, 51, 0.12);
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(2,6,23,0.06);
+    box-shadow: 0 2px 8px rgba(2, 6, 23, 0.06);
     flex-shrink: 0;
 }
 
 .profile-link:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(24,168,97,0.15);
+    box-shadow: 0 4px 12px rgba(24, 168, 97, 0.15);
     background: #fafffe;
 }
 
 .profile-link:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(24,168,97,0.08);
+    box-shadow: 0 2px 8px rgba(24, 168, 97, 0.08);
 }
 
 .profile-icon {
@@ -184,10 +184,10 @@ app-notification .icon-btn {
 
     border-radius: 50%;
     background: #ffffff;
-    border: 2px solid rgba(7,22,51,0.12);
+    border: 2px solid rgba(7, 22, 51, 0.12);
 
     transition: all 0.2s ease;
-    box-shadow: 0 2px 8px rgba(2,6,23,0.06);
+    box-shadow: 0 2px 8px rgba(2, 6, 23, 0.06);
     flex-shrink: 0;
 
     padding: 0;
@@ -198,14 +198,14 @@ app-notification .icon-btn {
 app-notification .icon-btn:hover {
     border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(24,168,97,0.15);
+    box-shadow: 0 4px 12px rgba(24, 168, 97, 0.15);
     background: #fafffe;
 }
 
 /* Active — яг profile шиг */
 app-notification .icon-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(24,168,97,0.08);
+    box-shadow: 0 2px 8px rgba(24, 168, 97, 0.08);
 }
 
 /* Bell icon size = profile icon size */
@@ -227,7 +227,8 @@ app-notification .notif-btn {
     height: 8px;
     border-radius: 50%;
     background: #22a65b;
-    border: 2px solid #ffffff; /* дугуй дээр цэвэр суух */
+    border: 2px solid #ffffff;
+    /* дугуй дээр цэвэр суух */
 }
 
 .btn,
@@ -250,38 +251,38 @@ app-notification .notif-btn {
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
-    box-shadow: 0 4px 12px rgba(24,168,97,0.15);
+    box-shadow: 0 4px 12px rgba(24, 168, 97, 0.15);
 }
 
 .btn:hover {
     background: #1e9250;
     border-color: #1e9250;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(24,168,97,0.25);
+    box-shadow: 0 6px 18px rgba(24, 168, 97, 0.25);
 }
 
 .btn:active {
     transform: translateY(0);
-    box-shadow: 0 3px 10px rgba(24,168,97,0.15);
+    box-shadow: 0 3px 10px rgba(24, 168, 97, 0.15);
 }
 
 .outline-btn {
     background: #fff;
     color: #0b2a4b;
-    border-color: rgba(7,22,51,0.12);
-    box-shadow: 0 2px 6px rgba(2,6,23,0.04);
+    border-color: rgba(7, 22, 51, 0.12);
+    box-shadow: 0 2px 6px rgba(2, 6, 23, 0.04);
 }
 
 .outline-btn:hover {
-    background: rgba(24,168,97,0.05);
+    background: rgba(24, 168, 97, 0.05);
     border-color: var(--accent);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(24,168,97,0.12);
+    box-shadow: 0 4px 12px rgba(24, 168, 97, 0.12);
 }
 
 .outline-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(24,168,97,0.08);
+    box-shadow: 0 2px 8px rgba(24, 168, 97, 0.08);
 }
 
 .container {
@@ -308,8 +309,8 @@ app-notification .notif-btn {
     padding: 0.5rem 0.8rem;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(2,6,23,0.04);
-    border: 1px solid rgba(7,22,51,0.04);
+    box-shadow: 0 2px 8px rgba(2, 6, 23, 0.04);
+    border: 1px solid rgba(7, 22, 51, 0.04);
 }
 
 .sort-icon {
@@ -405,20 +406,20 @@ app-notification .notif-btn {
     padding: 0.8rem;
     box-shadow: var(--shadow);
     position: relative;
-    border: 1px solid rgba(7,22,51,0.04);
+    border: 1px solid rgba(7, 22, 51, 0.04);
     transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(2,6,23,0.12);
-    border-color: rgba(24,168,97,0.2);
+    box-shadow: 0 12px 32px rgba(2, 6, 23, 0.12);
+    border-color: rgba(24, 168, 97, 0.2);
 }
 
 .card:active {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(2,6,23,0.1);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.1);
 }
 
 .thumb {
@@ -514,7 +515,7 @@ footer.site {
     margin: 2.2rem 0 0;
     margin-left: calc(-50vw + 50%);
     padding: 1.5rem 1rem;
-    border-top: 1px solid rgba(7,22,51,0.03);
+    border-top: 1px solid rgba(7, 22, 51, 0.03);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -564,7 +565,7 @@ copyright {
     .cards {
         grid-template-columns: repeat(3, 1fr);
     }
-    
+
     .container {
         padding: 1.5rem 1rem;
     }
@@ -574,7 +575,7 @@ copyright {
     .cards {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .container {
         padding: 1.5rem 0.75rem;
     }
@@ -592,7 +593,7 @@ copyright {
     .cards {
         grid-template-columns: 1fr;
     }
-    
+
     .container {
         padding: 1.5rem 0.75rem;
     }
