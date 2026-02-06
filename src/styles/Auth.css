@@ -1,0 +1,192 @@
+/* ================================================================
+   1. PAGE LAYOUT
+   ================================================================ */
+.login-page,
+.register-page {
+  max-width: 480px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.login-page header,
+.register-page header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-page h1,
+.register-page h1 {
+  font-size: 28px;
+  color: #111827;
+  margin: 0;
+}
+
+/* ================================================================
+   2. FORM BOX
+   ================================================================ */
+.form-box {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* ================================================================
+   3. FORM ELEMENTS
+   ================================================================ */
+.login-form fieldset,
+.register-page fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-form label,
+.register-page label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.login-form input[type="tel"],
+.login-form input[type="password"],
+.register-page input[type="text"],
+.register-page input[type="tel"],
+.register-page input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e6e8eb;
+  border-radius: 8px;
+  font-size: 15px;
+  margin-bottom: 18px;
+  outline: none;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.login-form input:focus,
+.register-page input:focus {
+  border-color: #22a65b;
+  box-shadow: 0 0 0 3px rgba(34, 166, 91, 0.1);
+}
+
+/* ================================================================
+   4. CHECKBOX
+   ================================================================ */
+.checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px !important;
+  cursor: pointer;
+  font-weight: 500 !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0 !important;
+  accent-color: #22a65b;
+}
+
+/* ================================================================
+   5. SUBMIT BUTTON
+   ================================================================ */
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: #22a65b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: all 0.2s ease;
+}
+
+.btn-submit:hover {
+  background: #1e9250;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 166, 91, 0.2);
+}
+
+/* ================================================================
+   6. GOOGLE BUTTON
+   ================================================================ */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e6e8eb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.google-btn:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* ================================================================
+   7. FORM FOOTER
+   ================================================================ */
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.form-footer a {
+  color: #22a65b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ================================================================
+   8. RESPONSIVE
+   ================================================================ */
+@media (max-width: 480px) {
+  .login-page,
+  .register-page {
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .form-box {
+    padding: 25px 20px;
+    border-radius: 12px;
+  }
+
+  .login-page h1,
+  .register-page h1 {
+    font-size: 24px;
+  }
+
+  .google-btn {
+    font-size: 15px;
+  }
+}

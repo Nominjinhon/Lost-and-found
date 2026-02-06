@@ -1,0 +1,292 @@
+/* ================================================================
+   1. HOST & CONTAINER
+   ================================================================ */
+filter-sidebar {
+  --fs-accent: var(--accent, #18a861);
+  --fs-card: var(--card, #ffffff);
+  --fs-border: rgba(7, 22, 51, 0.08);
+  --fs-text: #0b2a4b;
+  --fs-muted: var(--muted, #6b7280);
+  --fs-shadow: var(--shadow-md, 0 8px 22px rgba(2, 6, 23, 0.06));
+  --fs-radius: 14px;
+  display: block;
+  font-family: inherit;
+  color: inherit;
+}
+
+filter-sidebar aside {
+  width: 100%;
+  max-width: 300px;
+  background: var(--fs-card);
+  border: 1px solid var(--fs-border);
+  border-radius: var(--fs-radius);
+  padding: 20px;
+  box-shadow: var(--fs-shadow);
+}
+
+/* ================================================================
+   2. HEADER
+   ================================================================ */
+filter-sidebar header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--fs-border);
+  padding-bottom: 15px;
+}
+
+filter-sidebar fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+  background: #f1f3f5;
+  padding: 4px;
+  border-radius: 12px;
+}
+
+filter-sidebar fieldset legend {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* ================================================================
+   3. TOGGLE BUTTONS (Type Selection)
+   ================================================================ */
+filter-sidebar label.radio {
+  position: relative;
+  cursor: pointer;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fs-muted);
+  transition: all 0.2s;
+  border-radius: 8px;
+  z-index: 1;
+}
+
+filter-sidebar label.radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+filter-sidebar label.radio:has(input:checked) {
+  background-color: #fff;
+  color: var(--fs-text);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================================================
+   4. CLEAR BUTTON
+   ================================================================ */
+filter-sidebar button.clear {
+  border: 0;
+  background: transparent;
+  color: var(--fs-muted);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-left: auto; /* Push to right */
+}
+
+filter-sidebar button.clear:hover {
+  text-decoration: underline;
+  color: var(--fs-accent);
+}
+
+/* ================================================================
+   5. SECTIONS
+   ================================================================ */
+filter-sidebar section {
+  margin-bottom: 24px;
+}
+
+filter-sidebar h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--fs-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ================================================================
+   6. LOCATION DROPDOWN
+   ================================================================ */
+filter-sidebar select.location-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--fs-border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--fs-text);
+  background-color: #fff;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+filter-sidebar select.location-select:focus {
+  border-color: var(--fs-accent);
+  box-shadow: 0 0 0 3px rgba(24, 168, 97, 0.1);
+}
+
+/* ================================================================
+   7. CHECKBOXES LIST
+   ================================================================ */
+filter-sidebar ul.scroll {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+filter-sidebar label.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: var(--fs-text);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+filter-sidebar label.check input {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  accent-color: var(--fs-accent);
+  cursor: pointer;
+}
+
+/* ================================================================
+   8. CALENDAR
+   ================================================================ */
+filter-sidebar section.calendar > article {
+  background: #fff;
+  border: 1px solid var(--fs-border);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+filter-sidebar nav.month {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+filter-sidebar nav.month strong {
+  font-weight: 700;
+  color: var(--fs-text);
+  font-size: 0.95rem;
+}
+
+filter-sidebar nav.month button {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid var(--fs-border);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fs-muted);
+}
+
+filter-sidebar nav.month button:hover {
+  background: rgba(24, 168, 97, 0.08);
+  color: var(--fs-accent);
+}
+
+/* Day of week header */
+filter-sidebar ol.dow {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  color: var(--fs-muted);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Calendar grid */
+filter-sidebar ol.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+/* Calendar cells */
+filter-sidebar .cell {
+  display: grid;
+  place-items: center;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--fs-text);
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+filter-sidebar li.cell.cell--empty {
+  height: 32px;
+  background: transparent;
+}
+
+filter-sidebar .cell:hover {
+  background: rgba(24, 168, 97, 0.1);
+  color: var(--fs-accent);
+}
+
+filter-sidebar .cell--selected {
+  background: var(--fs-accent);
+  color: #fff;
+}
+
+filter-sidebar .cell--start {
+  background: var(--fs-accent);
+  color: #fff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+filter-sidebar .cell--end {
+  background: var(--fs-accent);
+  color: #fff;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+filter-sidebar .cell--in-range {
+  background: rgba(24, 168, 97, 0.15);
+  color: var(--fs-accent);
+  border-radius: 0;
+}

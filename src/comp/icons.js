@@ -1,4 +1,3 @@
-// src/comp/icons.js
 function base(size) {
   return `width="${size}" height="${size}" viewBox="0 0 24 24"
     fill="none" stroke="currentColor" stroke-width="1.5"

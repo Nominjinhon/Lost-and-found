@@ -21,4 +21,4 @@ class MainFooter extends HTMLElement {
   }
 }
 
-window.customElements.define('main-footer', MainFooter);
+window.customElements.define("main-footer", MainFooter);
