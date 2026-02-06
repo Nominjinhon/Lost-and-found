@@ -1,5 +1,7 @@
+import { api } from "../api.js";
+
 export function RegisterPage() {
-  return `
+  const html = `
     <div class="container">
     <section class="register-page">
       <article class="form-box">
@@ -28,12 +30,9 @@ export function RegisterPage() {
               <span>Үйлчилгээний нөхцөл зөвшөөрөх</span>
             </label>
 
-            <button type="submit" class="btn btn--primary">Бүртгүүлэх</button>
+            <div id="register-error" class="error-message" style="color: red; margin-bottom: 1rem; display: none;"></div>
 
-            <a href="#" class="google-btn">
-              <img src="https://www.google.com/favicon.ico" alt="Google">
-              <span>Google</span>
-            </a>
+            <button type="submit" class="btn btn--primary">Бүртгүүлэх</button>
 
             <footer class="form-footer">
               <a href="#login">Нэвтрэх</a>
@@ -44,5 +43,42 @@ export function RegisterPage() {
     </section>
     </div>
   `;
-}
 
+  setTimeout(() => {
+    const form = document.getElementById("register-form");
+    const errorMsg = document.getElementById("register-error");
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorMsg.style.display = "none";
+        errorMsg.textContent = "";
+
+        const formData = new FormData(form);
+        const name = formData.get("lastname");
+        const phone = formData.get("phone");
+        const password = formData.get("password");
+        const confirmPassword = formData.get("confirm-password");
+
+        if (password !== confirmPassword) {
+          errorMsg.textContent = "Нууц үг таарахгүй байна";
+          errorMsg.style.display = "block";
+          return;
+        }
+
+        try {
+          const data = await api.register({ name, phone, password });
+
+          localStorage.setItem("user", JSON.stringify(data));
+
+          window.location.hash = "#";
+        } catch (err) {
+          errorMsg.textContent = err.message;
+          errorMsg.style.display = "block";
+        }
+      });
+    }
+  }, 0);
+
+  return html;
+}
