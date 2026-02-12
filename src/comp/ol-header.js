@@ -1,3 +1,5 @@
+import { icon } from "./icons.js";
+
 class MainHeader extends HTMLElement {
   constructor() {
     super();
@@ -43,7 +45,7 @@ class MainHeader extends HTMLElement {
           <notification-menu></notification-menu>
       </div>
       <a class="profile-link" href="#profile" aria-label="Профайл">
-          <img src="images/user.png" alt="Хэрэглэгчийн профайл" class="profile-icon" />
+          ${icon("user", 20)}
       </a>
     `;
   }

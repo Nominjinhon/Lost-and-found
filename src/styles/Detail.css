@@ -1,6 +1,3 @@
-/* ================================================================
-   1. PAGE LAYOUT
-   ================================================================ */
 .detail-page {
   max-width: 1000px;
   margin: 0 auto;
@@ -21,9 +18,6 @@
   color: var(--accent);
 }
 
-/* ================================================================
-   2. LAYOUT
-   ================================================================ */
 .detail-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -31,9 +25,6 @@
   align-items: start;
 }
 
-/* ================================================================
-   3. IMAGE SECTION
-   ================================================================ */
 .detail-image-section {
   position: sticky;
   top: 1.5rem;
@@ -41,11 +32,11 @@
 
 .detail-image {
   margin: 0;
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px hsl(0, 0%, 0%, 0.08);
+  border: 1px solid hsl(0, 0%, 0%, 0.04);
 }
 
 .detail-image img {
@@ -55,15 +46,12 @@
   aspect-ratio: 1;
 }
 
-/* ================================================================
-   4. INFO SECTION
-   ================================================================ */
 .detail-info-section {
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px hsl(0, 0%, 0%, 0.06);
+  border: 1px solid hsl(0, 0%, 0%, 0.04);
 }
 
 .detail-header {
@@ -84,8 +72,8 @@
 }
 
 .status-badge.lost {
-  background: #fef2f2;
-  color: #dc2626;
+  background: hsl(0, 86%, 97%);
+  color: hsl(0, 73%, 51%);
 }
 
 .status-badge.lost::before {
@@ -94,8 +82,8 @@
 }
 
 .status-badge.found {
-  background: #f0fdf4;
-  color: #16a34a;
+  background: hsl(138, 76%, 97%);
+  color: hsl(142, 71%, 45%);
 }
 
 .status-badge.found::before {
@@ -109,8 +97,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 0%, 0.1);
   border-radius: 12px;
   cursor: pointer;
   color: var(--muted);
@@ -120,22 +108,19 @@
 .bookmark-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
-  background: rgba(24, 168, 97, 0.05);
+  background: hsl(150, 75%, 38%, 0.05);
 }
 
 .bookmark-btn.saved {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: hsl(0, 0%, 100%);
 }
 
 .bookmark-btn.saved svg {
   fill: currentColor;
 }
 
-/* ================================================================
-   5. TITLE & META
-   ================================================================ */
 .detail-title {
   font-size: 1.75rem;
   font-weight: 700;
@@ -149,7 +134,7 @@
   flex-direction: column;
   gap: 0.75rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid hsl(0, 0%, 0%, 0.06);
   margin-bottom: 1.5rem;
 }
 
@@ -166,13 +151,10 @@
   flex-shrink: 0;
 }
 
-/* ================================================================
-   6. SECTIONS
-   ================================================================ */
 .detail-section {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid hsl(0, 0%, 0%, 0.06);
 }
 
 .detail-section:last-of-type {
@@ -200,15 +182,12 @@
 .category-tag {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: #f3f4f6;
+  background: hsl(220, 13%, 95%);
   border-radius: 8px;
   font-size: 0.95rem;
   color: var(--text-secondary);
 }
 
-/* ================================================================
-   7. ACTIONS
-   ================================================================ */
 .detail-actions {
   display: flex;
   gap: 1rem;
@@ -217,55 +196,16 @@
 
 .detail-actions .btn {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none;
-}
-
-.detail-actions .btn--primary {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(24, 168, 97, 0.25);
-}
-
-.detail-actions .btn--primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(24, 168, 97, 0.3);
-}
-
-.detail-actions .btn--ghost {
-  background: #fff;
-  color: var(--text-secondary);
-  border: 2px solid rgba(0, 0, 0, 0.1);
-}
-
-.detail-actions .btn--ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: rgba(24, 168, 97, 0.05);
 }
 
 .detail-posted {
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid hsl(0, 0%, 0%, 0.06);
   font-size: 0.85rem;
   color: var(--muted);
 }
 
-/* ================================================================
-   8. NOT FOUND
-   ================================================================ */
 .not-found {
   text-align: center;
   padding: 4rem 2rem;
@@ -287,9 +227,6 @@
   margin: 0 0 1.5rem;
 }
 
-/* ================================================================
-   9. CLAIM MODAL
-   ================================================================ */
 .claim-modal {
   position: fixed;
   top: 0;
@@ -316,20 +253,20 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: hsl(0, 0%, 0%, 0.5);
   backdrop-filter: blur(4px);
 }
 
 .claim-modal-content {
   position: relative;
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   border-radius: 20px;
   padding: 2rem;
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 60px hsl(0, 0%, 0%, 0.2);
   transform: translateY(20px);
   transition: transform 0.3s ease;
 }
@@ -347,7 +284,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f3f4f6;
+  background: hsl(220, 13%, 95%);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -356,7 +293,7 @@
 }
 
 .claim-modal-close:hover {
-  background: #e5e7eb;
+  background: hsl(220, 13%, 91%);
   color: var(--text-primary);
 }
 
@@ -396,17 +333,17 @@
 }
 
 .claim-form .required {
-  color: #ef4444;
+  color: hsl(0, 84%, 60%);
 }
 
 .claim-form input,
 .claim-form textarea {
   width: 100%;
   padding: 0.85rem 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid hsl(0, 0%, 0%, 0.1);
   border-radius: 10px;
   font-size: 1rem;
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   transition: all 0.2s;
 }
 
@@ -414,7 +351,7 @@
 .claim-form textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(24, 168, 97, 0.1);
+  box-shadow: 0 0 0 3px hsl(150, 75%, 38%, 0.1);
 }
 
 .claim-form .form-grid {
@@ -431,42 +368,8 @@
 
 .claim-actions .btn {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
 }
 
-.claim-actions .btn--ghost {
-  background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  color: var(--text-secondary);
-}
-
-.claim-actions .btn--ghost:hover {
-  background: #f9fafb;
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-.claim-actions .btn--primary {
-  background: var(--accent);
-  border: none;
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(24, 168, 97, 0.25);
-}
-
-.claim-actions .btn--primary:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-}
-
-/* Success State */
 .claim-success {
   text-align: center;
   padding: 2rem;
@@ -488,9 +391,6 @@
   padding: 1rem 2rem;
 }
 
-/* ================================================================
-   10. RESPONSIVE
-   ================================================================ */
 @media (max-width: 768px) {
   .detail-layout {
     grid-template-columns: 1fr;

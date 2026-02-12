@@ -1,101 +1,129 @@
 const Notification = require("../models/Notification");
 const Ad = require("../models/Ad");
+const asyncHandler = require("../utils/asyncHandler");
+const {
+  sendValidationError,
+  sendNotFoundError,
+  sendUnauthorizedError,
+  sendServerError,
+} = require("../utils/errorResponse");
 
-const createNotification = async (req, res) => {
-  try {
-    const { adId, message, contactInfo } = req.body;
+const createNotification = asyncHandler(async (req, res) => {
+  const { adId, message, contactInfo } = req.body;
 
-    const ad = await Ad.findById(adId);
-    if (!ad) {
-      res.status(404);
-      throw new Error("Ad not found");
-    }
-
-    if (ad.user.toString() === req.user.id) {
-      res.status(400);
-      throw new Error("You cannot claim your own ad");
-    }
-
-    const notification = await Notification.create({
-      recipient: ad.user,
-      sender: req.user.id,
-      ad: adId,
-      type: "claim",
-      message: message || "Таны зарыг эзэмшигч нь гэж мэдээллээ.",
-      contactInfo,
-    });
-
-    res.status(201).json(notification);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  const ad = await Ad.findById(adId);
+  if (!ad) {
+    return sendNotFoundError(res, "Зар олдсонгүй");
   }
-};
 
-const getMyNotifications = async (req, res) => {
-  try {
-    const notifications = await Notification.find({ recipient: req.user.id })
-      .populate("sender", "name email")
-      .populate("ad", "title image type status")
-      .sort({ createdAt: -1 });
-
-    const validNotifications = notifications.filter((n) => n.ad);
-
-    res.status(200).json(validNotifications);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  if (ad.user.toString() === req.user.id) {
+    return sendValidationError(res, "Та өөрийн зарыг эзэмших боломжгүй");
   }
-};
 
-const markAsRead = async (req, res) => {
-  try {
-    const notification = await Notification.findById(req.params.id);
+  const notification = await Notification.create({
+    recipient: ad.user,
+    sender: req.user.id,
+    ad: adId,
+    type: "claim",
+    message: message || "Таны зарыг эзэмшигч нь гэж мэдээллээ.",
+    contactInfo,
+  });
 
-    if (!notification) {
-      res.status(404);
-      throw new Error("Notification not found");
-    }
+  res.status(201).json(notification);
+});
 
-    if (notification.recipient.toString() !== req.user.id) {
-      res.status(401);
-      throw new Error("Not authorized");
-    }
+const getMyNotifications = asyncHandler(async (req, res) => {
+  const notifications = await Notification.find({ recipient: req.user.id })
+    .populate("sender", "name email")
+    .populate("ad", "title image type status")
+    .sort({ createdAt: -1 });
 
-    notification.status = "read";
-    await notification.save();
+  const validNotifications = notifications.filter((n) => n.ad);
 
-    res.status(200).json(notification);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  res.status(200).json(validNotifications);
+});
+
+const markAsRead = asyncHandler(async (req, res) => {
+  const notification = await Notification.findById(req.params.id);
+
+  if (!notification) {
+    return sendNotFoundError(res, "Мэдэгдэл олдсонгүй");
   }
-};
 
-const verifyClaim = async (req, res) => {
-  try {
-    const notification = await Notification.findById(req.params.id);
-
-    if (!notification) {
-      res.status(404);
-      throw new Error("Notification not found");
-    }
-
-    if (notification.recipient.toString() !== req.user.id) {
-      res.status(401);
-      throw new Error("Not authorized");
-    }
-
-    notification.isVerified = true;
-    notification.status = "read";
-    await notification.save();
-
-    res.status(200).json(notification);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  if (notification.recipient.toString() !== req.user.id) {
+    return sendUnauthorizedError(res, "Та энэ үйлдлийг хийх эрхгүй байна");
   }
-};
+
+  notification.status = "read";
+  await notification.save();
+
+  res.status(200).json(notification);
+});
+
+const verifyClaim = asyncHandler(async (req, res) => {
+  const notification = await Notification.findById(req.params.id).populate(
+    "ad",
+    "title",
+  );
+
+  if (!notification) {
+    return sendNotFoundError(res, "Мэдэгдэл олдсонгүй");
+  }
+
+  if (notification.recipient.toString() !== req.user.id) {
+    return sendUnauthorizedError(res, "Та энэ үйлдлийг хийх эрхгүй байна");
+  }
+
+  notification.isVerified = true;
+  notification.status = "read";
+  await notification.save();
+
+  await Notification.create({
+    recipient: notification.sender,
+    sender: req.user.id,
+    ad: notification.ad._id,
+    type: "claim_verified",
+    message: `Таны "${notification.ad.title}" зарт өгсөн мэдээлэл баталгаажлаа!`,
+    status: "unread",
+  });
+
+  res.status(200).json(notification);
+});
+
+const rejectClaim = asyncHandler(async (req, res) => {
+  const notification = await Notification.findById(req.params.id).populate(
+    "ad",
+    "title",
+  );
+
+  if (!notification) {
+    return sendNotFoundError(res, "Мэдэгдэл олдсонгүй");
+  }
+
+  if (notification.recipient.toString() !== req.user.id) {
+    return sendUnauthorizedError(res, "Та энэ үйлдлийг хийх эрхгүй байна");
+  }
+
+  notification.isRejected = true;
+  notification.status = "read";
+  await notification.save();
+
+  await Notification.create({
+    recipient: notification.sender,
+    sender: req.user.id,
+    ad: notification.ad._id,
+    type: "claim_rejected",
+    message: `Таны "${notification.ad.title}" зарт өгсөн мэдээлэл цуцлагдлаа.`,
+    status: "unread",
+  });
+
+  res.status(200).json(notification);
+});
 
 module.exports = {
   createNotification,
   getMyNotifications,
   markAsRead,
   verifyClaim,
+  rejectClaim,
 };

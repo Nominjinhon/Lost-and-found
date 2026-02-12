@@ -1,6 +1,3 @@
-/* ================================================================
-   1. PAGE LAYOUT
-   ================================================================ */
 .add-page {
   max-width: 700px;
   margin: 0 auto;
@@ -25,9 +22,6 @@
   margin: 0;
 }
 
-/* ================================================================
-   2. TABS
-   ================================================================ */
 .tabs {
   display: flex;
   gap: 1rem;
@@ -43,55 +37,49 @@
   padding: 1rem 1.5rem;
   border-radius: 12px;
   border: 2px solid transparent;
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   color: var(--muted);
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px hsl(0, 0%, 0%, 0.04);
 }
 
 .tab:hover {
-  background: rgba(24, 168, 97, 0.05);
+  background: hsl(150, 75%, 38%, 0.05);
   color: var(--accent);
-  border-color: rgba(24, 168, 97, 0.2);
+  border-color: hsl(150, 75%, 38%, 0.2);
 }
 
 .tab--active {
   background: var(--accent);
-  color: #fff;
+  color: hsl(0, 0%, 100%);
   border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(24, 168, 97, 0.25);
+  box-shadow: 0 4px 12px hsl(150, 75%, 38%, 0.25);
 }
 
 .tab--active:hover {
   background: var(--accent-hover);
-  color: #fff;
+  color: hsl(0, 0%, 100%);
 }
 
 .tab svg {
   flex-shrink: 0;
 }
 
-/* ================================================================
-   3. FORM CARD
-   ================================================================ */
 .form-card {
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px hsl(0, 0%, 0%, 0.06);
+  border: 1px solid hsl(0, 0%, 0%, 0.04);
 }
 
-/* ================================================================
-   4. FORM SECTIONS
-   ================================================================ */
 .form-section {
   margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid hsl(0, 0%, 0%, 0.06);
 }
 
 .form-section:last-of-type {
@@ -114,9 +102,6 @@
   color: var(--accent);
 }
 
-/* ================================================================
-   5. FORM ELEMENTS
-   ================================================================ */
 .form-row {
   margin-bottom: 1.25rem;
 }
@@ -134,7 +119,7 @@
 }
 
 .required {
-  color: #ef4444;
+  color: hsl(0, 84%, 60%);
 }
 
 .form-row input[type="text"],
@@ -145,10 +130,10 @@
 .form-row textarea {
   width: 100%;
   padding: 0.85rem 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid hsl(0, 0%, 0%, 0.1);
   border-radius: 10px;
   font-size: 1rem;
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   color: var(--text-primary);
   transition: all 0.2s ease;
 }
@@ -158,17 +143,19 @@
 .form-row textarea:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(24, 168, 97, 0.1);
+  box-shadow: 0 0 0 3px hsl(150, 75%, 38%, 0.1);
 }
 
 .form-row input::placeholder,
 .form-row textarea::placeholder {
-  color: #9ca3af;
+  color: hsl(220, 13%, 69%);
+  font-family: inherit;
 }
 
 .form-row textarea {
   resize: vertical;
   min-height: 100px;
+  font-family: inherit;
 }
 
 .form-grid {
@@ -183,9 +170,6 @@
   margin: 0.5rem 0 0;
 }
 
-/* ================================================================
-   6. FEATURE CHIPS
-   ================================================================ */
 .feature-chips {
   display: flex;
   flex-wrap: wrap;
@@ -197,7 +181,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  background: #f3f4f6;
+  background: hsl(220, 13%, 95%);
   border-radius: 20px;
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -207,12 +191,12 @@
 }
 
 .chip:hover {
-  background: rgba(24, 168, 97, 0.1);
+  background: hsl(150, 75%, 38%, 0.1);
   color: var(--accent);
 }
 
 .chip:has(input:checked) {
-  background: rgba(24, 168, 97, 0.15);
+  background: hsl(150, 75%, 38%, 0.15);
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -221,14 +205,11 @@
   display: none;
 }
 
-/* ================================================================
-   7. REWARD INPUT
-   ================================================================ */
 .reward-input {
   display: flex;
   align-items: center;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 0%, 0.1);
   border-radius: 10px;
   overflow: hidden;
   transition: all 0.2s ease;
@@ -236,15 +217,15 @@
 
 .reward-input:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(24, 168, 97, 0.1);
+  box-shadow: 0 0 0 3px hsl(150, 75%, 38%, 0.1);
 }
 
 .reward-input .currency {
   padding: 0.85rem 1rem;
-  background: #f3f4f6;
+  background: hsl(220, 13%, 95%);
   font-weight: 600;
   color: var(--muted);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid hsl(0, 0%, 0%, 0.1);
 }
 
 .reward-input input {
@@ -256,9 +237,6 @@
   outline: none;
 }
 
-/* ================================================================
-   8. TOGGLE SWITCH
-   ================================================================ */
 .toggle-label {
   display: flex;
   align-items: center;
@@ -277,7 +255,7 @@
   position: relative;
   width: 44px;
   height: 24px;
-  background: #e5e7eb;
+  background: hsl(220, 13%, 91%);
   border-radius: 12px;
   transition: all 0.2s ease;
 }
@@ -289,10 +267,10 @@
   left: 2px;
   width: 20px;
   height: 20px;
-  background: #fff;
+  background: hsl(0, 0%, 100%);
   border-radius: 50%;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px hsl(0, 0%, 0%, 0.1);
 }
 
 .toggle-label input:checked + .toggle-switch {
@@ -303,9 +281,6 @@
   left: 22px;
 }
 
-/* ================================================================
-   9. AD TYPE OPTIONS
-   ================================================================ */
 .ad-type-options {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -315,8 +290,8 @@
 .ad-type-card {
   display: block;
   padding: 1.25rem;
-  background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.08);
+  background: hsl(0, 0%, 100%);
+  border: 2px solid hsl(0, 0%, 0%, 0.08);
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -324,13 +299,13 @@
 }
 
 .ad-type-card:hover {
-  border-color: rgba(24, 168, 97, 0.3);
-  background: rgba(24, 168, 97, 0.02);
+  border-color: hsl(150, 75%, 38%, 0.3);
+  background: hsl(150, 75%, 38%, 0.02);
 }
 
 .ad-type-card.selected {
   border-color: var(--accent);
-  background: rgba(24, 168, 97, 0.05);
+  background: hsl(150, 75%, 38%, 0.05);
 }
 
 .ad-type-card input {
@@ -352,17 +327,17 @@
 }
 
 .ad-type-badge.urgent {
-  background: #fef2f2;
-  color: #dc2626;
+  background: hsl(0, 86%, 97%);
+  color: hsl(0, 73%, 51%);
 }
 
 .ad-type-badge.special {
-  background: #fef9c3;
-  color: #ca8a04;
+  background: hsl(54, 92%, 88%);
+  color: hsl(43, 97%, 40%);
 }
 
 .ad-type-badge.normal {
-  background: #f0fdf4;
+  background: hsl(138, 76%, 97%);
   color: var(--accent);
 }
 
@@ -377,59 +352,18 @@
   color: var(--muted);
 }
 
-/* ================================================================
-   10. FORM ACTIONS
-   ================================================================ */
 .ad-form .form-actions {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid hsl(0, 0%, 0%, 0.06);
 }
 
-.ad-form .btn {
+.ad-form .form-actions .btn {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.ad-form .btn--ghost {
-  background: #fff;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  color: var(--text-secondary);
-}
-
-.ad-form .btn--ghost:hover {
-  background: #f9fafb;
-  border-color: rgba(0, 0, 0, 0.2);
-}
-
-.ad-form .btn--primary {
-  background: var(--accent);
-  border: 2px solid var(--accent);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(24, 168, 97, 0.25);
-}
-
-.ad-form .btn--primary:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(24, 168, 97, 0.3);
-}
-
-/* ================================================================
-   11. RESPONSIVE
-   ================================================================ */
 @media (max-width: 760px) {
   .add-page {
     padding: 1rem 0;

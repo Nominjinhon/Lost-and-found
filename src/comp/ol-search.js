@@ -1,3 +1,5 @@
+import { icon } from "./icons.js";
+
 class MainSearch extends HTMLElement {
   constructor() {
     super();
@@ -18,7 +20,7 @@ class MainSearch extends HTMLElement {
         <form class="search-main" role="search" aria-label="Хайлт хийх">
           <input id="search-input" type="search" placeholder="Хайх зүйлээ оруулна уу..." />
           <button type="submit" aria-label="Хайх">
-            <img src="images/search.png" alt="" class="search-icon" />
+            ${icon("search", 18)}
           </button>
         </form>
       </div>
