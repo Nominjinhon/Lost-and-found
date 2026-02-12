@@ -10,7 +10,6 @@ const renderHtml = () => `
         </header>
 
         <form class="ad-form" id="adForm" novalidate>
-          <!-- Tabs -->
           <section class="tabs" role="tablist" aria-label="Зарын төрөл">
             <button type="button" role="tab" aria-selected="true" id="tab-lost" class="tab tab--active" data-value="lost">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -27,10 +26,7 @@ const renderHtml = () => `
               <span>Олсон</span>
             </button>
           </section>
-
-          <!-- Main Form Card -->
           <div class="form-card">
-            <!-- Item Info Section -->
             <section class="form-section">
               <h2 class="section-title">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -70,7 +66,6 @@ const renderHtml = () => `
               </div>
             </section>
 
-            <!-- Location & Date Section -->
             <section class="form-section">
               <h2 class="section-title">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -93,7 +88,7 @@ const renderHtml = () => `
               </div>
             </section>
 
-            <!-- Features Section -->
+            
             <section class="form-section">
               <h2 class="section-title">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -109,7 +104,7 @@ const renderHtml = () => `
               <p class="help-text" id="help-features">Эд зүйлийн онцлог шинж тэмдгүүдийг бичнэ үү</p>
             </section>
             
-            <!-- Contact Section -->
+          
             <section class="form-section" id="section-contact">
               <h2 class="section-title">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -124,7 +119,7 @@ const renderHtml = () => `
               </div>
             </section>
 
-            <!-- Ad Type Section -->
+           
             <section class="form-section" id="section-ad-type">
               <h2 class="section-title">
                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -157,7 +152,7 @@ const renderHtml = () => `
 
             <div id="add-error" class="error-message" style="color: red; margin-bottom: 1rem; display: none;"></div>
 
-            <!-- Form Actions -->
+         
             <footer class="form-actions">
               <button type="reset" class="btn btn--ghost">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -331,7 +326,6 @@ const initPage = () => {
       });
     });
 
-    // Initial UI update
     updateFormUI(currentStatus, elements);
 
     const adTypeCards = document.querySelectorAll(".ad-type-card");

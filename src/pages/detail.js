@@ -62,7 +62,7 @@ function renderDetailView(container, ad) {
 
   container.innerHTML = `
       <article class="detail-page">
-        <!-- Back Button -->
+        
         <a href="#/" class="back-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -72,17 +72,19 @@ function renderDetailView(container, ad) {
         </a>
 
         <div class="detail-layout">
-          <!-- Image Section -->
           <div class="detail-image-section">
             <figure class="detail-image">
               <img src="${imageSrc}" alt="${ad.title}" />
             </figure>
           </div>
 
-          <!-- Info Section -->
+        
           <div class="detail-info-section">
             <div class="detail-header">
-              <span class="status-badge ${statusClass}">${statusText}</span>
+              <div class="header-badges">
+                <span class="status-badge ${statusClass}">${statusText}</span>
+                ${isOwner ? '<span class="owner-badge">Таны зар</span>' : ""}
+              </div>
               <button class="bookmark-btn" aria-label="Хадгалах">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M19 21L12 16L5 21V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V21Z"/>
@@ -127,7 +129,6 @@ function renderDetailView(container, ad) {
               ${
                 isOwner
                   ? `
-                  <button class="btn btn--secondary" disabled>Таны зар</button>
                   <button class="btn btn--outline-danger delete-btn" data-ad-id="${ad._id}" style="border: 1px solid #ef4444; color: #ef4444; background: transparent; padding: 0.75rem 1.5rem; border-radius: 12px; font-weight: 500; cursor: pointer;">Устгах</button>
                   `
                   : `
@@ -138,8 +139,6 @@ function renderDetailView(container, ad) {
                 </svg>
                 Мэдээлэх
               </button>
-              `
-              }
               ${
                 ad.contact
                   ? `
@@ -151,6 +150,8 @@ function renderDetailView(container, ad) {
               </a>`
                   : ""
               }
+              `
+              }
             </div>
 
             <div class="detail-posted">
@@ -160,7 +161,6 @@ function renderDetailView(container, ad) {
         </div>
       </article>
 
-      <!-- Claim Modal -->
       <div class="claim-modal" id="claimModal">
         <div class="claim-modal-overlay"></div>
         <div class="claim-modal-content">
@@ -243,19 +243,9 @@ function attachDetailListeners(ad) {
   if (cancelBtn) cancelBtn.addEventListener("click", closeModal);
   if (overlay) overlay.addEventListener("click", closeModal);
 
-  // Bookmark logic
   const bookmarkBtn = document.querySelector(".bookmark-btn");
   if (bookmarkBtn) {
     const userStr = localStorage.getItem("user");
-    // Need to check if user has this ad saved.
-    // We need 'user' object with current savedAds.
-    // Since we don't have fresh user object here easily (localStorage might be stale),
-    // we could fetch it, or rely on what we have.
-    // Let's try to fetch fresh user data or check if 'ad' matches something?
-    // Wait, 'ad' object doesn't know if current user saved it.
-    // We need to fetch 'me' or assume localStorage has updated savedAds if we update it properly.
-
-    // Let's use api.getMe to get fresh status if user is logged in.
     if (userStr) {
       const token = JSON.parse(userStr).token;
       api
@@ -282,7 +272,6 @@ function attachDetailListeners(ad) {
 
           bookmarkBtn.disabled = true;
           const res = await api.toggleBookmark(ad._id, user.token);
-          // res is array of savedAds
 
           const isSaved = res.includes(ad._id);
           if (isSaved) {
@@ -301,7 +290,6 @@ function attachDetailListeners(ad) {
     }
   }
 
-  // Delete Ad Logic
   const deleteBtn = document.querySelector(".delete-btn");
   if (deleteBtn) {
     deleteBtn.addEventListener("click", async () => {
@@ -317,7 +305,7 @@ function attachDetailListeners(ad) {
         try {
           await api.deleteAd(adId, token);
           alert("Зар амжилттай устгагдлаа");
-          window.location.hash = "#profile"; // Redirect to profile
+          window.location.hash = "#profile";
         } catch (e) {
           alert("Алдаа: " + e.message);
           deleteBtn.disabled = false;
@@ -330,7 +318,7 @@ function attachDetailListeners(ad) {
   if (claimForm) {
     claimForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      // Form data
+
       const formData = new FormData(claimForm);
       const data = Object.fromEntries(formData);
 
@@ -350,7 +338,7 @@ function attachDetailListeners(ad) {
         await api.createNotification(
           {
             adId: ad._id,
-            message: data.description, // Use description as main message
+            message: data.description,
             contactInfo: {
               description: data.description,
               features: data.features,
@@ -362,7 +350,6 @@ function attachDetailListeners(ad) {
           user.token,
         );
 
-        // Show success message
         claimModal.innerHTML = `
               <div class="claim-modal-content claim-success">
                 <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#18a861" stroke-width="2">

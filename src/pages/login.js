@@ -25,7 +25,7 @@ export function LoginPage() {
 
           <div id="login-error" class="error-message" style="color: red; margin-bottom: 1rem; display: none;"></div>
 
-          <button type="submit" class="btn-submit">Нэвтрэх</button>
+          <button type="submit" class="btn btn--primary full-width">Нэвтрэх</button>
         </fieldset>
       </form>
       

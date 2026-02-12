@@ -32,7 +32,7 @@ export function RegisterPage() {
 
             <div id="register-error" class="error-message" style="color: red; margin-bottom: 1rem; display: none;"></div>
 
-            <button type="submit" class="btn btn--primary">Бүртгүүлэх</button>
+            <button type="submit" class="btn btn--primary full-width">Бүртгүүлэх</button>
 
             <footer class="form-footer">
               <a href="#login">Нэвтрэх</a>
