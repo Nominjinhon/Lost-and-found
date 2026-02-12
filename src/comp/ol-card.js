@@ -1,3 +1,5 @@
+import { icon } from "./icons.js";
+
 class AdCard extends HTMLElement {
   constructor() {
     super();
@@ -26,11 +28,11 @@ class AdCard extends HTMLElement {
           </figure>
           <h3 id="${id}" class="card-title"><span class="status-dot ${statusClass}" aria-hidden="true">●</span> ${title}</h3>
           <p class="meta">
-            <img src="images/calendar.png" alt="" class="meta-icon" />
+            ${icon("calendar", 16)}
             <span>${date}</span>
           </p>
           <p class="location">
-            <img src="images/location.png" alt="" class="meta-icon" />
+            ${icon("location", 16)}
             <span>${location}</span>
           </p>
         </article>

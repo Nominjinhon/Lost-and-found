@@ -18,4 +18,5 @@ export const api = {
   getMyNotifications: notificationsApi.getMyNotifications,
   markNotificationRead: notificationsApi.markNotificationRead,
   verifyClaim: notificationsApi.verifyClaim,
+  rejectClaim: notificationsApi.rejectClaim,
 };

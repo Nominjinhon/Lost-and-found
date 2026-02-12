@@ -30,3 +30,10 @@ export async function verifyClaim(id, token) {
     headers: createAuthHeaders(token),
   });
 }
+
+export async function rejectClaim(id, token) {
+  return apiFetch(`/notifications/${id}/reject`, {
+    method: "PUT",
+    headers: createAuthHeaders(token),
+  });
+}

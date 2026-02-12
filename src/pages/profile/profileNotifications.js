@@ -19,6 +19,9 @@ export async function loadNotifications(token) {
             ${notifs
               .map((n) => {
                 const isVerified = n.isVerified;
+                const isRejected = n.isRejected;
+                const isResponse =
+                  n.type === "claim_verified" || n.type === "claim_rejected";
                 const contact = n.contactInfo || {};
                 const dateDisplay = new Date(n.createdAt).toLocaleDateString(
                   "mn-MN",
@@ -43,6 +46,9 @@ export async function loadNotifications(token) {
                             }
                         </div>
                         
+                        ${
+                          !isResponse && contact.description
+                            ? `
                         <div class="claim-details">
                             <div class="detail-row">
                                 <span class="detail-label">Тайлбар:</span>
@@ -61,19 +67,41 @@ export async function loadNotifications(token) {
                                 <span class="detail-value"><a href="tel:${contact.contact}">${contact.contact}</a></span>
                             </div>
                         </div>
+                        `
+                            : ""
+                        }
                     </div>
                 
                     <div class="notif-actions">
                         ${
-                          isVerified
-                            ? `<div class="verify-badge">
-                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                          n.type === "claim_verified"
+                            ? `<div class="response-badge verified">
+                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
                                  Баталгаажсан
                                </div>`
-                            : `<button class="btn btn--primary verify-btn" data-id="${n._id}">
-                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                 Баталгаажуулах
-                               </button>`
+                            : n.type === "claim_rejected"
+                              ? `<div class="response-badge rejected">
+                                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                   Цуцлагдсан
+                                 </div>`
+                              : isVerified
+                                ? `<div class="verify-badge">
+                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                     Баталгаажсан
+                                   </div>`
+                                : n.isRejected
+                                  ? `<div class="verify-badge rejected">
+                                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                       Цуцлагдсан
+                                     </div>`
+                                  : `<button class="btn btn--outline-danger reject-btn" data-id="${n._id}">
+                                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                       Цуцлах
+                                     </button>
+                                     <button class="btn btn--primary verify-btn" data-id="${n._id}">
+                                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                       Баталгаажуулах
+                                     </button>`
                         }
                     </div>
                 </article>
@@ -97,6 +125,25 @@ export async function loadNotifications(token) {
           alert(e.message);
           btn.disabled = false;
           btn.textContent = "Баталгаажуулах";
+        }
+      });
+    });
+
+    container.querySelectorAll(".reject-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("Энэ мэдээллийг цуцлах уу?")) return;
+
+        const id = btn.dataset.id;
+        btn.disabled = true;
+        btn.textContent = "Уншиж байна...";
+
+        try {
+          await api.rejectClaim(id, token);
+          loadNotifications(token);
+        } catch (e) {
+          alert(e.message);
+          btn.disabled = false;
+          btn.textContent = "Цуцлах";
         }
       });
     });

@@ -211,81 +211,87 @@
 .notification-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .notification-card {
   background: hsl(0, 0%, 100%);
-  border-radius: 16px;
-  padding: 1.5rem;
-  border: 1px solid hsl(217, 76%, 11%, 0.08);
-  box-shadow: 0 2px 8px hsl(229, 84%, 5%, 0.04);
+  border-radius: 12px;
+  padding: 0;
+  border: 1px solid hsl(0, 0%, 90%);
+  box-shadow: 0 1px 3px hsl(0, 0%, 0%, 0.05);
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
 .notification-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px hsl(229, 84%, 5%, 0.08);
-  border-color: hsl(150, 75%, 38%, 0.2);
+  box-shadow: 0 4px 12px hsl(0, 0%, 0%, 0.08);
+  border-color: hsl(0, 0%, 80%);
 }
 
 .notification-card.unread {
-  background: hsl(120, 33%, 99%);
-  border-left: 4px solid var(--accent);
+  background: hsl(210, 100%, 99%);
+  border-left: 3px solid var(--accent);
 }
 
 .notification-card.unread::after {
   content: "";
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 1.25rem;
+  right: 1.25rem;
   width: 8px;
   height: 8px;
   background: var(--accent);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px hsl(150, 75%, 38%, 0.1);
 }
 
 .notif-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1rem;
-  padding-right: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  background: hsl(0, 0%, 98%);
+  border-bottom: 1px solid hsl(0, 0%, 93%);
 }
 
 .notif-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--text-dark);
+  color: hsl(210, 20%, 20%);
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
 }
 
 .notif-date {
-  font-size: 0.8rem;
-  color: var(--muted);
+  font-size: 0.8125rem;
+  color: hsl(210, 10%, 50%);
   white-space: nowrap;
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
+  font-weight: 400;
 }
 
 .notif-body {
-  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.5rem;
 }
 
 .notif-ref {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.2rem;
-  display: flex;
+  font-size: 0.875rem;
+  color: hsl(210, 15%, 40%);
+  margin-bottom: 1rem;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: hsl(210, 17%, 98%);
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  width: fit-content;
+  background: hsl(210, 20%, 96%);
+  padding: 0.5rem 0.875rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.notif-ref span {
+  color: hsl(210, 10%, 50%);
+  font-weight: 400;
 }
 
 .notif-ref a {
@@ -298,23 +304,30 @@
   text-decoration: underline;
 }
 
+.notif-ref .deleted-ad {
+  color: hsl(0, 60%, 50%);
+  font-style: italic;
+}
+
 .claim-details {
-  background: hsl(0, 0%, 100%);
-  border: 1px solid hsl(217, 76%, 11%, 0.08);
-  border-radius: 12px;
-  padding: 1.2rem;
+  background: hsl(0, 0%, 98%);
+  border: 1px solid hsl(0, 0%, 92%);
+  border-radius: 8px;
+  padding: 1rem 1.125rem;
+  margin-top: 1rem;
 }
 
 .notification-card.unread .claim-details {
-  background: hsl(0, 0%, 100%, 0.6);
+  background: hsl(210, 100%, 98%);
+  border-color: hsl(210, 80%, 92%);
 }
 
 .detail-row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  margin-bottom: 0.6rem;
-  font-size: 0.95rem;
-  gap: 1rem;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  gap: 0.75rem;
 }
 
 .detail-row:last-child {
@@ -322,55 +335,155 @@
 }
 
 .detail-label {
-  color: var(--muted);
+  color: hsl(210, 10%, 45%);
   font-weight: 500;
+  min-width: 100px;
+  flex-shrink: 0;
+  font-size: 0.8125rem;
 }
 
 .detail-value {
-  color: var(--text-dark);
+  color: hsl(210, 20%, 25%);
   font-weight: 400;
+  flex: 1;
+  word-break: break-word;
 }
 
 .detail-value a {
   color: var(--accent);
   font-weight: 600;
+  text-decoration: none;
+}
+
+.detail-value a:hover {
+  text-decoration: underline;
 }
 
 .notif-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
-  border-top: 1px solid hsl(217, 76%, 11%, 0.06);
-  padding-top: 1.2rem;
-  margin-top: 0.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  background: hsl(0, 0%, 99%);
+  border-top: 1px solid hsl(0, 0%, 93%);
+  padding: 1rem 1.5rem;
 }
 
 .verify-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: hsl(161, 94%, 30%);
+  color: hsl(150, 70%, 30%);
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.6rem 1.2rem;
-  background: hsl(150, 76%, 96%);
-  border-radius: 10px;
-  border: 1px solid hsl(160, 84%, 39%, 0.2);
+  font-size: 0.8125rem;
+  padding: 0.5rem 1rem;
+  background: hsl(150, 60%, 96%);
+  border-radius: 6px;
+  border: 1px solid hsl(150, 50%, 85%);
+}
+
+.verify-badge svg {
+  flex-shrink: 0;
+}
+
+.verify-badge.rejected {
+  color: hsl(0, 70%, 45%);
+  background: hsl(0, 60%, 96%);
+  border-color: hsl(0, 50%, 85%);
+}
+
+.response-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+.response-badge.verified {
+  color: hsl(150, 70%, 30%);
+  background: hsl(150, 60%, 96%);
+  border-color: hsl(150, 50%, 85%);
+}
+
+.response-badge.rejected {
+  color: hsl(0, 70%, 45%);
+  background: hsl(0, 60%, 96%);
+  border-color: hsl(0, 50%, 85%);
+}
+
+.response-badge svg {
+  flex-shrink: 0;
+}
+
+.btn--outline-danger {
+  color: hsl(0, 70%, 50%);
+  background: hsl(0, 0%, 100%);
+  border: 1.5px solid hsl(0, 70%, 50%);
+}
+
+.btn--outline-danger:hover {
+  background: hsl(0, 70%, 50%);
+  color: hsl(0, 0%, 100%);
+}
+
+.btn--outline-danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.verify-btn {
+  font-size: 0.875rem;
+  padding: 0.5rem 1.125rem;
+  border-radius: 6px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.verify-btn svg {
+  flex-shrink: 0;
 }
 
 @media (max-width: 600px) {
   .notif-header {
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .notif-body {
+    padding: 1rem 1.25rem;
   }
 
   .detail-row {
-    grid-template-columns: 1fr;
-    gap: 0.2rem;
-    margin-bottom: 0.8rem;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
   }
 
   .detail-label {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
+    min-width: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    color: hsl(210, 10%, 55%);
+  }
+
+  .detail-value {
+    font-size: 0.875rem;
+  }
+
+  .notif-actions {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .notification-card.unread::after {
+    top: 1rem;
+    right: 1rem;
   }
 }

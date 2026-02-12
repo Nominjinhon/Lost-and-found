@@ -61,7 +61,10 @@ const markAsRead = asyncHandler(async (req, res) => {
 });
 
 const verifyClaim = asyncHandler(async (req, res) => {
-  const notification = await Notification.findById(req.params.id);
+  const notification = await Notification.findById(req.params.id).populate(
+    "ad",
+    "title",
+  );
 
   if (!notification) {
     return sendNotFoundError(res, "Мэдэгдэл олдсонгүй");
@@ -75,6 +78,45 @@ const verifyClaim = asyncHandler(async (req, res) => {
   notification.status = "read";
   await notification.save();
 
+  await Notification.create({
+    recipient: notification.sender,
+    sender: req.user.id,
+    ad: notification.ad._id,
+    type: "claim_verified",
+    message: `Таны "${notification.ad.title}" зарт өгсөн мэдээлэл баталгаажлаа!`,
+    status: "unread",
+  });
+
+  res.status(200).json(notification);
+});
+
+const rejectClaim = asyncHandler(async (req, res) => {
+  const notification = await Notification.findById(req.params.id).populate(
+    "ad",
+    "title",
+  );
+
+  if (!notification) {
+    return sendNotFoundError(res, "Мэдэгдэл олдсонгүй");
+  }
+
+  if (notification.recipient.toString() !== req.user.id) {
+    return sendUnauthorizedError(res, "Та энэ үйлдлийг хийх эрхгүй байна");
+  }
+
+  notification.isRejected = true;
+  notification.status = "read";
+  await notification.save();
+
+  await Notification.create({
+    recipient: notification.sender,
+    sender: req.user.id,
+    ad: notification.ad._id,
+    type: "claim_rejected",
+    message: `Таны "${notification.ad.title}" зарт өгсөн мэдээлэл цуцлагдлаа.`,
+    status: "unread",
+  });
+
   res.status(200).json(notification);
 });
 
@@ -83,4 +125,5 @@ module.exports = {
   getMyNotifications,
   markAsRead,
   verifyClaim,
+  rejectClaim,
 };

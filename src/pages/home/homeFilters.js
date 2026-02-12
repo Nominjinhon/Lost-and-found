@@ -1,10 +1,5 @@
 import { api } from "../../api.js";
-import {
-  getCurrentFilter,
-  getAllAds,
-  setCurrentFilter,
-  isDefaultFilter,
-} from "./homeState.js";
+import { getCurrentFilter, getAllAds, setCurrentFilter } from "./homeState.js";
 import {
   renderAdsContainer,
   renderNoResults,
@@ -60,15 +55,7 @@ export async function applyFilters() {
 }
 
 export function checkAndRenderDefault() {
-  if (isDefaultFilter()) {
-    const allAds = getAllAds();
-    if (allAds.length > 0) {
-      renderAdsContainer(renderDefaultView(allAds));
-      attachShowMoreListeners();
-    }
-  } else {
-    applyFilters();
-  }
+  applyFilters();
 }
 
 export function searchAds(query) {

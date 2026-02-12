@@ -80,15 +80,18 @@ filter-sidebar button.clear {
   border: 0;
   background: transparent;
   color: var(--fs-muted);
-  font-weight: 600;
   cursor: pointer;
-  font-size: 0.85rem;
-  margin-left: auto;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 filter-sidebar button.clear:hover {
-  text-decoration: underline;
-  color: var(--fs-accent);
+  background: hsl(0, 0%, 95%);
+  color: var(--fs-text);
 }
 
 filter-sidebar section {
